@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'presentation/pages/layout/main_layout.dart';
+import 'constant/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +14,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mulli App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
+        fontFamily: 'Pretendard',
+        scaffoldBackgroundColor: AppColors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.white,
+          elevation: 0,
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.white,
+          selectedItemColor: AppColors.black,
+          unselectedItemColor: AppColors.darkGray,
+          selectedLabelStyle: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.w600,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontFamily: 'Pretendard',
+            fontWeight: FontWeight.normal,
+          ),
+        ),
       ),
       home: const MainLayout(),
     );
