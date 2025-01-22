@@ -1,0 +1,11 @@
+class: LoungePosts
+table: lounge_posts
+
+fields:
+  userId: int
+  content: String
+  likesCount: int
+  reportsCount: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

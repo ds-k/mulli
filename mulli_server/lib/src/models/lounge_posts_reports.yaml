@@ -1,0 +1,9 @@
+class: LoungePostsReports
+table: lounge_posts_reports
+
+fields:
+  userId: int
+  postId: int
+  reason: String
+  createdAt: DateTime
+  updatedAt: DateTime

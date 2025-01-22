@@ -1,0 +1,12 @@
+class: LoungePostsComments
+table: lounge_posts_comments
+
+fields:
+  userId: int
+  postId: int
+  content: String
+  likesCount: int
+  reportsCount: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

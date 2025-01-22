@@ -1,0 +1,9 @@
+class: ProductsLikes
+table: products_likes
+
+fields:
+  productId: int
+  userId: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

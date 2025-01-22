@@ -1,0 +1,8 @@
+class: Brands
+table: brands
+
+fields:
+  name: String
+  logoImageUrl: String
+  createdAt: DateTime
+  updatedAt: DateTime

@@ -1,0 +1,9 @@
+class: ProductsImages
+table: products_images
+
+fields:
+  productId: int
+  s3Url: String
+  isThumbnail: bool
+  createdAt: DateTime
+  updatedAt: DateTime
