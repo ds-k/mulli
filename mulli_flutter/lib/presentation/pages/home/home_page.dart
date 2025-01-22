@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mulli_client/mulli_client.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 var client = Client('http://$localhost:8080/')
   ..connectivityMonitor = FlutterConnectivityMonitor();
@@ -35,7 +36,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('홈'),
+        title: SvgPicture.asset(
+          'assets/images/logo/appbar_logo.svg',
+          height: 17,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
