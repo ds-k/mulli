@@ -1,0 +1,12 @@
+class: Messages
+table: messages
+
+fields:
+  chatRoomId: int
+  senderId: int
+  messageType: String
+  content: String
+  isRead: bool
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

@@ -1,0 +1,10 @@
+class: ChatRooms
+table: chat_rooms
+
+fields:
+  productId: int
+  buyerId: int
+  sellerId: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

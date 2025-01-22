@@ -1,0 +1,9 @@
+class: UserTerms
+table: user_terms
+
+fields:
+  userId: int
+  termId: int
+  isAgreed: bool
+  agreedAt: DateTime
+  createdAt: DateTime

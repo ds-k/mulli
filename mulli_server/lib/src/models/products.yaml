@@ -1,0 +1,19 @@
+class: Products
+table: products
+
+fields:
+  userId: int
+  title: String
+  description: String
+  price: double
+  brandId: int
+  clubType: String
+  shaftType: String
+  flexType: String
+  year: int
+  location: String
+  likesCount: int
+  reportsCount: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

@@ -1,0 +1,9 @@
+class: LoungePostsLikes
+table: lounge_posts_likes
+
+fields:
+  postId: int
+  userId: int
+  isDeleted: bool
+  createdAt: DateTime
+  updatedAt: DateTime

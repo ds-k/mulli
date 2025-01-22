@@ -1,0 +1,10 @@
+class: TermsAndConditions
+table: terms_and_conditions
+
+fields:
+  title: String
+  description: String
+  isRequired: bool
+  version: int
+  createdAt: DateTime
+  updatedAt: DateTime

@@ -1,0 +1,9 @@
+class: ProductsReports
+table: products_reports
+
+fields:
+  userId: int
+  productId: int
+  reason: String
+  createdAt: DateTime
+  updatedAt: DateTime

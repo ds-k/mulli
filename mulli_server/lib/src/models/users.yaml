@@ -1,0 +1,11 @@
+class: Users
+table: users
+
+fields:
+  socialId: String
+  socialType: String
+  name: String
+  email: String
+  userProfileUrl: String
+  createdAt: DateTime
+  updatedAt: DateTime
