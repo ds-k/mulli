@@ -25,6 +25,7 @@ import 'products_reports.dart' as _i13;
 import 'terms_and_conditions.dart' as _i14;
 import 'user_terms.dart' as _i15;
 import 'users.dart' as _i16;
+import 'package:mulli_client/src/protocol/users.dart' as _i17;
 export 'brands.dart';
 export 'chat_rooms.dart';
 export 'example.dart';
@@ -146,6 +147,10 @@ class Protocol extends _i1.SerializationManager {
     }
     if (t == _i1.getType<_i16.Users?>()) {
       return (data != null ? _i16.Users.fromJson(data) : null) as T;
+    }
+    if (t == List<_i17.Users>) {
+      return (data as List).map((e) => deserialize<_i17.Users>(e)).toList()
+          as dynamic;
     }
     return super.deserialize<T>(data, t);
   }

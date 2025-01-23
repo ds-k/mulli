@@ -1,34 +1,36 @@
 import 'package:serverpod/serverpod.dart';
-
 import 'package:mulli_server/src/web/routes/root.dart';
+import 'package:mulli_server/src/generated/protocol.dart';
+import 'package:mulli_server/src/generated/endpoints.dart';
+import 'package:mulli_server/src/seeding/users_seeder.dart';
 
-import 'src/generated/protocol.dart';
-import 'src/generated/endpoints.dart';
+class Server extends Serverpod {
+  Server(List<String> args) : super(args, Protocol(), Endpoints());
 
-// This is the starting point of your Serverpod server. In most cases, you will
-// only need to make additions to this file if you add future calls,  are
-// configuring Relic (Serverpod's web-server), or need custom setup work.
+  // Users seeding 메소드 추가
+  Future<void> seedUsers() async {
+    final session = await createSession();
+    try {
+      await UsersSeeder(session).run();
+      print('Users seeding completed successfully.');
+    } catch (e) {
+      print('Error seeding users: $e');
+    } finally {
+      session.close();
+    }
+  }
+}
 
 void run(List<String> args) async {
-  // Initialize Serverpod and connect it with your generated code.
-  final pod = Serverpod(
-    args,
-    Protocol(),
-    Endpoints(),
-  );
+  final pod = Server(args);
 
-  // If you are using any future calls, they need to be registered here.
-  // pod.registerFutureCall(ExampleFutureCall(), 'exampleFutureCall');
-
-  // Setup a default page at the web root.
+  // Setup routes...
   pod.webServer.addRoute(RouteRoot(), '/');
   pod.webServer.addRoute(RouteRoot(), '/index.html');
-  // Serve all files in the /static directory.
   pod.webServer.addRoute(
     RouteStaticDirectory(serverDirectory: 'static', basePath: '/'),
     '/*',
   );
 
-  // Start the server.
   await pod.start();
 }
