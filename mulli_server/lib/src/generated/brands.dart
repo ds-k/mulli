@@ -15,6 +15,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
   Brands._({
     this.id,
     required this.name,
+    required this.englishName,
     required this.logoImageUrl,
     required this.createdAt,
     required this.updatedAt,
@@ -23,6 +24,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
   factory Brands({
     int? id,
     required String name,
+    required String englishName,
     required String logoImageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -32,6 +34,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
     return Brands(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String,
+      englishName: jsonSerialization['englishName'] as String,
       logoImageUrl: jsonSerialization['logoImageUrl'] as String,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -49,6 +52,8 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String name;
 
+  String englishName;
+
   String logoImageUrl;
 
   DateTime createdAt;
@@ -61,6 +66,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
   Brands copyWith({
     int? id,
     String? name,
+    String? englishName,
     String? logoImageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -70,6 +76,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'englishName': englishName,
       'logoImageUrl': logoImageUrl,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
@@ -81,6 +88,7 @@ abstract class Brands implements _i1.TableRow, _i1.ProtocolSerialization {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'englishName': englishName,
       'logoImageUrl': logoImageUrl,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
@@ -123,12 +131,14 @@ class _BrandsImpl extends Brands {
   _BrandsImpl({
     int? id,
     required String name,
+    required String englishName,
     required String logoImageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
           id: id,
           name: name,
+          englishName: englishName,
           logoImageUrl: logoImageUrl,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -138,6 +148,7 @@ class _BrandsImpl extends Brands {
   Brands copyWith({
     Object? id = _Undefined,
     String? name,
+    String? englishName,
     String? logoImageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -145,6 +156,7 @@ class _BrandsImpl extends Brands {
     return Brands(
       id: id is int? ? id : this.id,
       name: name ?? this.name,
+      englishName: englishName ?? this.englishName,
       logoImageUrl: logoImageUrl ?? this.logoImageUrl,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -156,6 +168,10 @@ class BrandsTable extends _i1.Table {
   BrandsTable({super.tableRelation}) : super(tableName: 'brands') {
     name = _i1.ColumnString(
       'name',
+      this,
+    );
+    englishName = _i1.ColumnString(
+      'englishName',
       this,
     );
     logoImageUrl = _i1.ColumnString(
@@ -174,6 +190,8 @@ class BrandsTable extends _i1.Table {
 
   late final _i1.ColumnString name;
 
+  late final _i1.ColumnString englishName;
+
   late final _i1.ColumnString logoImageUrl;
 
   late final _i1.ColumnDateTime createdAt;
@@ -184,6 +202,7 @@ class BrandsTable extends _i1.Table {
   List<_i1.Column> get columns => [
         id,
         name,
+        englishName,
         logoImageUrl,
         createdAt,
         updatedAt,

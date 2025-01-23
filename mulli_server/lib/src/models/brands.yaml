@@ -3,6 +3,7 @@ table: brands
 
 fields:
   name: String
+  englishName: String
   logoImageUrl: String
   createdAt: DateTime
   updatedAt: DateTime

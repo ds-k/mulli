@@ -15,6 +15,7 @@ abstract class Brands implements _i1.SerializableModel {
   Brands._({
     this.id,
     required this.name,
+    required this.englishName,
     required this.logoImageUrl,
     required this.createdAt,
     required this.updatedAt,
@@ -23,6 +24,7 @@ abstract class Brands implements _i1.SerializableModel {
   factory Brands({
     int? id,
     required String name,
+    required String englishName,
     required String logoImageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -32,6 +34,7 @@ abstract class Brands implements _i1.SerializableModel {
     return Brands(
       id: jsonSerialization['id'] as int?,
       name: jsonSerialization['name'] as String,
+      englishName: jsonSerialization['englishName'] as String,
       logoImageUrl: jsonSerialization['logoImageUrl'] as String,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -47,6 +50,8 @@ abstract class Brands implements _i1.SerializableModel {
 
   String name;
 
+  String englishName;
+
   String logoImageUrl;
 
   DateTime createdAt;
@@ -56,6 +61,7 @@ abstract class Brands implements _i1.SerializableModel {
   Brands copyWith({
     int? id,
     String? name,
+    String? englishName,
     String? logoImageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -65,6 +71,7 @@ abstract class Brands implements _i1.SerializableModel {
     return {
       if (id != null) 'id': id,
       'name': name,
+      'englishName': englishName,
       'logoImageUrl': logoImageUrl,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
@@ -83,12 +90,14 @@ class _BrandsImpl extends Brands {
   _BrandsImpl({
     int? id,
     required String name,
+    required String englishName,
     required String logoImageUrl,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
           id: id,
           name: name,
+          englishName: englishName,
           logoImageUrl: logoImageUrl,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -98,6 +107,7 @@ class _BrandsImpl extends Brands {
   Brands copyWith({
     Object? id = _Undefined,
     String? name,
+    String? englishName,
     String? logoImageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -105,6 +115,7 @@ class _BrandsImpl extends Brands {
     return Brands(
       id: id is int? ? id : this.id,
       name: name ?? this.name,
+      englishName: englishName ?? this.englishName,
       logoImageUrl: logoImageUrl ?? this.logoImageUrl,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
