@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? _resultMessage;
   String? _errorMessage;
+  List<dynamic>? _users;
   final _textEditingController = TextEditingController();
 
   void _callHello() async {
@@ -29,6 +30,26 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         _errorMessage = '$e';
       });
+    }
+  }
+
+  void _fetchUsers() async {
+    try {
+      final users = await client.users.getAllUsers();
+      setState(() {
+        _users = users;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _fetchUserById(int id) async {
+    try {
+      final user = await client.users.getUserById(id);
+      // 결과 처리
+    } catch (e) {
+      // 에러 처리
     }
   }
 
@@ -61,7 +82,15 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('서버로 전송'),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ElevatedButton(
+                onPressed: _fetchUsers,
+                child: const Text('유저 조회'),
+              ),
+            ),
             _ResultDisplay(
+              users: _users,
               resultMessage: _resultMessage,
               errorMessage: _errorMessage,
             ),
@@ -75,10 +104,12 @@ class _HomePageState extends State<HomePage> {
 class _ResultDisplay extends StatelessWidget {
   final String? resultMessage;
   final String? errorMessage;
+  final List<dynamic>? users;
 
   const _ResultDisplay({
     this.resultMessage,
     this.errorMessage,
+    this.users,
   });
 
   @override
@@ -97,10 +128,18 @@ class _ResultDisplay extends StatelessWidget {
     }
 
     return Container(
-      height: 50,
+      height: 100,
       color: backgroundColor,
-      child: Center(
-        child: Text(text),
+      child: Column(
+        children: [
+          Center(
+            child: Text(text),
+          ),
+          if (users != null)
+            for (var user in users!)
+              Text(
+                  '${user.id} ${user.name} ${user.email} ${user.createdAt} ${user.socialType}'),
+        ],
       ),
     );
   }
