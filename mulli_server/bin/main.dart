@@ -5,7 +5,8 @@ import 'package:mulli_server/server.dart';
 void main(List<String> args) async {
   if (args.contains('--seed-data')) {
     final server = Server(args);
-    await server.seedUsers();
+    // await server.seedUsers();
+    await server.seedBrands();
     return;
   }
 
