@@ -14,7 +14,8 @@
 import 'package:serverpod_test/serverpod_test.dart' as _i1;
 import 'package:serverpod/serverpod.dart' as _i2;
 import 'dart:async' as _i3;
-import 'package:mulli_server/src/generated/users.dart' as _i4;
+import 'package:mulli_server/src/generated/brands.dart' as _i4;
+import 'package:mulli_server/src/generated/users.dart' as _i5;
 import 'package:mulli_server/src/generated/protocol.dart';
 import 'package:mulli_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -95,6 +96,8 @@ void withServerpod(
 }
 
 class TestEndpoints {
+  late final _BrandsEndpoint brands;
+
   late final _ExampleEndpoint example;
 
   late final _UsersEndpoint users;
@@ -107,6 +110,10 @@ class _InternalTestEndpoints extends TestEndpoints
     _i2.SerializationManager serializationManager,
     _i2.EndpointDispatch endpoints,
   ) {
+    brands = _BrandsEndpoint(
+      endpoints,
+      serializationManager,
+    );
     example = _ExampleEndpoint(
       endpoints,
       serializationManager,
@@ -115,6 +122,44 @@ class _InternalTestEndpoints extends TestEndpoints
       endpoints,
       serializationManager,
     );
+  }
+}
+
+class _BrandsEndpoint {
+  _BrandsEndpoint(
+    this._endpointDispatch,
+    this._serializationManager,
+  );
+
+  final _i2.EndpointDispatch _endpointDispatch;
+
+  final _i2.SerializationManager _serializationManager;
+
+  _i3.Future<List<_i4.Brands>> getAllBrands(
+      _i1.TestSessionBuilder sessionBuilder) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'brands',
+        method: 'getAllBrands',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'brands',
+          methodName: 'getAllBrands',
+          parameters: _i1.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<List<_i4.Brands>>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
   }
 }
 
@@ -168,7 +213,7 @@ class _UsersEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<List<_i4.Users>> getAllUsers(
+  _i3.Future<List<_i5.Users>> getAllUsers(
       _i1.TestSessionBuilder sessionBuilder) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
@@ -187,7 +232,7 @@ class _UsersEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<List<_i4.Users>>);
+        ) as _i3.Future<List<_i5.Users>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -195,7 +240,7 @@ class _UsersEndpoint {
     });
   }
 
-  _i3.Future<_i4.Users?> getUserById(
+  _i3.Future<_i5.Users?> getUserById(
     _i1.TestSessionBuilder sessionBuilder,
     int id,
   ) async {
@@ -216,7 +261,7 @@ class _UsersEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<_i4.Users?>);
+        ) as _i3.Future<_i5.Users?>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();
@@ -224,7 +269,7 @@ class _UsersEndpoint {
     });
   }
 
-  _i3.Future<_i4.Users?> getUserByEmail(
+  _i3.Future<_i5.Users?> getUserByEmail(
     _i1.TestSessionBuilder sessionBuilder,
     String email,
   ) async {
@@ -245,7 +290,7 @@ class _UsersEndpoint {
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<_i4.Users?>);
+        ) as _i3.Future<_i5.Users?>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

@@ -23,7 +23,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
     required this.shaftType,
     required this.flexType,
     required this.year,
-    required this.location,
+    required this.region1,
+    required this.region2,
+    required this.region3,
+    this.region4,
+    required this.lat,
+    required this.lng,
     required this.likesCount,
     required this.reportsCount,
     required this.isDeleted,
@@ -42,7 +47,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
     required String shaftType,
     required String flexType,
     required int year,
-    required String location,
+    required String region1,
+    required String region2,
+    required String region3,
+    String? region4,
+    required double lat,
+    required double lng,
     required int likesCount,
     required int reportsCount,
     required bool isDeleted,
@@ -62,7 +72,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
       shaftType: jsonSerialization['shaftType'] as String,
       flexType: jsonSerialization['flexType'] as String,
       year: jsonSerialization['year'] as int,
-      location: jsonSerialization['location'] as String,
+      region1: jsonSerialization['region1'] as String,
+      region2: jsonSerialization['region2'] as String,
+      region3: jsonSerialization['region3'] as String,
+      region4: jsonSerialization['region4'] as String?,
+      lat: (jsonSerialization['lat'] as num).toDouble(),
+      lng: (jsonSerialization['lng'] as num).toDouble(),
       likesCount: jsonSerialization['likesCount'] as int,
       reportsCount: jsonSerialization['reportsCount'] as int,
       isDeleted: jsonSerialization['isDeleted'] as bool,
@@ -98,7 +113,17 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
 
   int year;
 
-  String location;
+  String region1;
+
+  String region2;
+
+  String region3;
+
+  String? region4;
+
+  double lat;
+
+  double lng;
 
   int likesCount;
 
@@ -124,7 +149,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
     String? shaftType,
     String? flexType,
     int? year,
-    String? location,
+    String? region1,
+    String? region2,
+    String? region3,
+    String? region4,
+    double? lat,
+    double? lng,
     int? likesCount,
     int? reportsCount,
     bool? isDeleted,
@@ -144,7 +174,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
       'shaftType': shaftType,
       'flexType': flexType,
       'year': year,
-      'location': location,
+      'region1': region1,
+      'region2': region2,
+      'region3': region3,
+      if (region4 != null) 'region4': region4,
+      'lat': lat,
+      'lng': lng,
       'likesCount': likesCount,
       'reportsCount': reportsCount,
       'isDeleted': isDeleted,
@@ -166,7 +201,12 @@ abstract class Products implements _i1.TableRow, _i1.ProtocolSerialization {
       'shaftType': shaftType,
       'flexType': flexType,
       'year': year,
-      'location': location,
+      'region1': region1,
+      'region2': region2,
+      'region3': region3,
+      if (region4 != null) 'region4': region4,
+      'lat': lat,
+      'lng': lng,
       'likesCount': likesCount,
       'reportsCount': reportsCount,
       'isDeleted': isDeleted,
@@ -219,7 +259,12 @@ class _ProductsImpl extends Products {
     required String shaftType,
     required String flexType,
     required int year,
-    required String location,
+    required String region1,
+    required String region2,
+    required String region3,
+    String? region4,
+    required double lat,
+    required double lng,
     required int likesCount,
     required int reportsCount,
     required bool isDeleted,
@@ -236,7 +281,12 @@ class _ProductsImpl extends Products {
           shaftType: shaftType,
           flexType: flexType,
           year: year,
-          location: location,
+          region1: region1,
+          region2: region2,
+          region3: region3,
+          region4: region4,
+          lat: lat,
+          lng: lng,
           likesCount: likesCount,
           reportsCount: reportsCount,
           isDeleted: isDeleted,
@@ -256,7 +306,12 @@ class _ProductsImpl extends Products {
     String? shaftType,
     String? flexType,
     int? year,
-    String? location,
+    String? region1,
+    String? region2,
+    String? region3,
+    Object? region4 = _Undefined,
+    double? lat,
+    double? lng,
     int? likesCount,
     int? reportsCount,
     bool? isDeleted,
@@ -274,7 +329,12 @@ class _ProductsImpl extends Products {
       shaftType: shaftType ?? this.shaftType,
       flexType: flexType ?? this.flexType,
       year: year ?? this.year,
-      location: location ?? this.location,
+      region1: region1 ?? this.region1,
+      region2: region2 ?? this.region2,
+      region3: region3 ?? this.region3,
+      region4: region4 is String? ? region4 : this.region4,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
       likesCount: likesCount ?? this.likesCount,
       reportsCount: reportsCount ?? this.reportsCount,
       isDeleted: isDeleted ?? this.isDeleted,
@@ -322,8 +382,28 @@ class ProductsTable extends _i1.Table {
       'year',
       this,
     );
-    location = _i1.ColumnString(
-      'location',
+    region1 = _i1.ColumnString(
+      'region1',
+      this,
+    );
+    region2 = _i1.ColumnString(
+      'region2',
+      this,
+    );
+    region3 = _i1.ColumnString(
+      'region3',
+      this,
+    );
+    region4 = _i1.ColumnString(
+      'region4',
+      this,
+    );
+    lat = _i1.ColumnDouble(
+      'lat',
+      this,
+    );
+    lng = _i1.ColumnDouble(
+      'lng',
       this,
     );
     likesCount = _i1.ColumnInt(
@@ -366,7 +446,17 @@ class ProductsTable extends _i1.Table {
 
   late final _i1.ColumnInt year;
 
-  late final _i1.ColumnString location;
+  late final _i1.ColumnString region1;
+
+  late final _i1.ColumnString region2;
+
+  late final _i1.ColumnString region3;
+
+  late final _i1.ColumnString region4;
+
+  late final _i1.ColumnDouble lat;
+
+  late final _i1.ColumnDouble lng;
 
   late final _i1.ColumnInt likesCount;
 
@@ -390,7 +480,12 @@ class ProductsTable extends _i1.Table {
         shaftType,
         flexType,
         year,
-        location,
+        region1,
+        region2,
+        region3,
+        region4,
+        lat,
+        lng,
         likesCount,
         reportsCount,
         isDeleted,

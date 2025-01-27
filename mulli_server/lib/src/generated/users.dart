@@ -19,6 +19,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
     required this.name,
     required this.email,
     required this.userProfileUrl,
+    required this.region1,
+    required this.region2,
+    required this.region3,
+    this.region4,
+    required this.lat,
+    required this.lng,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -30,6 +36,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
     required String name,
     required String email,
     required String userProfileUrl,
+    required String region1,
+    required String region2,
+    required String region3,
+    String? region4,
+    required double lat,
+    required double lng,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _UsersImpl;
@@ -42,6 +54,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
       name: jsonSerialization['name'] as String,
       email: jsonSerialization['email'] as String,
       userProfileUrl: jsonSerialization['userProfileUrl'] as String,
+      region1: jsonSerialization['region1'] as String,
+      region2: jsonSerialization['region2'] as String,
+      region3: jsonSerialization['region3'] as String,
+      region4: jsonSerialization['region4'] as String?,
+      lat: (jsonSerialization['lat'] as num).toDouble(),
+      lng: (jsonSerialization['lng'] as num).toDouble(),
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
@@ -66,6 +84,18 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
 
   String userProfileUrl;
 
+  String region1;
+
+  String region2;
+
+  String region3;
+
+  String? region4;
+
+  double lat;
+
+  double lng;
+
   DateTime createdAt;
 
   DateTime updatedAt;
@@ -80,6 +110,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
     String? name,
     String? email,
     String? userProfileUrl,
+    String? region1,
+    String? region2,
+    String? region3,
+    String? region4,
+    double? lat,
+    double? lng,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -92,6 +128,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
       'name': name,
       'email': email,
       'userProfileUrl': userProfileUrl,
+      'region1': region1,
+      'region2': region2,
+      'region3': region3,
+      if (region4 != null) 'region4': region4,
+      'lat': lat,
+      'lng': lng,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -106,6 +148,12 @@ abstract class Users implements _i1.TableRow, _i1.ProtocolSerialization {
       'name': name,
       'email': email,
       'userProfileUrl': userProfileUrl,
+      'region1': region1,
+      'region2': region2,
+      'region3': region3,
+      if (region4 != null) 'region4': region4,
+      'lat': lat,
+      'lng': lng,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
     };
@@ -151,6 +199,12 @@ class _UsersImpl extends Users {
     required String name,
     required String email,
     required String userProfileUrl,
+    required String region1,
+    required String region2,
+    required String region3,
+    String? region4,
+    required double lat,
+    required double lng,
     required DateTime createdAt,
     required DateTime updatedAt,
   }) : super._(
@@ -160,6 +214,12 @@ class _UsersImpl extends Users {
           name: name,
           email: email,
           userProfileUrl: userProfileUrl,
+          region1: region1,
+          region2: region2,
+          region3: region3,
+          region4: region4,
+          lat: lat,
+          lng: lng,
           createdAt: createdAt,
           updatedAt: updatedAt,
         );
@@ -172,6 +232,12 @@ class _UsersImpl extends Users {
     String? name,
     String? email,
     String? userProfileUrl,
+    String? region1,
+    String? region2,
+    String? region3,
+    Object? region4 = _Undefined,
+    double? lat,
+    double? lng,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -182,6 +248,12 @@ class _UsersImpl extends Users {
       name: name ?? this.name,
       email: email ?? this.email,
       userProfileUrl: userProfileUrl ?? this.userProfileUrl,
+      region1: region1 ?? this.region1,
+      region2: region2 ?? this.region2,
+      region3: region3 ?? this.region3,
+      region4: region4 is String? ? region4 : this.region4,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -210,6 +282,30 @@ class UsersTable extends _i1.Table {
       'userProfileUrl',
       this,
     );
+    region1 = _i1.ColumnString(
+      'region1',
+      this,
+    );
+    region2 = _i1.ColumnString(
+      'region2',
+      this,
+    );
+    region3 = _i1.ColumnString(
+      'region3',
+      this,
+    );
+    region4 = _i1.ColumnString(
+      'region4',
+      this,
+    );
+    lat = _i1.ColumnDouble(
+      'lat',
+      this,
+    );
+    lng = _i1.ColumnDouble(
+      'lng',
+      this,
+    );
     createdAt = _i1.ColumnDateTime(
       'createdAt',
       this,
@@ -230,6 +326,18 @@ class UsersTable extends _i1.Table {
 
   late final _i1.ColumnString userProfileUrl;
 
+  late final _i1.ColumnString region1;
+
+  late final _i1.ColumnString region2;
+
+  late final _i1.ColumnString region3;
+
+  late final _i1.ColumnString region4;
+
+  late final _i1.ColumnDouble lat;
+
+  late final _i1.ColumnDouble lng;
+
   late final _i1.ColumnDateTime createdAt;
 
   late final _i1.ColumnDateTime updatedAt;
@@ -242,6 +350,12 @@ class UsersTable extends _i1.Table {
         name,
         email,
         userProfileUrl,
+        region1,
+        region2,
+        region3,
+        region4,
+        lat,
+        lng,
         createdAt,
         updatedAt,
       ];

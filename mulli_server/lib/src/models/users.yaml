@@ -7,5 +7,11 @@ fields:
   name: String
   email: String
   userProfileUrl: String
+  region1: String
+  region2: String
+  region3: String
+  region4: String?
+  lat: double
+  lng: double
   createdAt: DateTime
   updatedAt: DateTime

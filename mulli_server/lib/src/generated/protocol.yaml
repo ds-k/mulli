@@ -1,3 +1,5 @@
+brands:
+  - getAllBrands:
 example:
   - hello:
 users:

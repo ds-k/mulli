@@ -11,8 +11,24 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'package:mulli_client/src/protocol/users.dart' as _i3;
-import 'protocol.dart' as _i4;
+import 'package:mulli_client/src/protocol/brands.dart' as _i3;
+import 'package:mulli_client/src/protocol/users.dart' as _i4;
+import 'protocol.dart' as _i5;
+
+/// {@category Endpoint}
+class EndpointBrands extends _i1.EndpointRef {
+  EndpointBrands(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'brands';
+
+  _i2.Future<List<_i3.Brands>> getAllBrands() =>
+      caller.callServerEndpoint<List<_i3.Brands>>(
+        'brands',
+        'getAllBrands',
+        {},
+      );
+}
 
 /// {@category Endpoint}
 class EndpointExample extends _i1.EndpointRef {
@@ -35,22 +51,22 @@ class EndpointUsers extends _i1.EndpointRef {
   @override
   String get name => 'users';
 
-  _i2.Future<List<_i3.Users>> getAllUsers() =>
-      caller.callServerEndpoint<List<_i3.Users>>(
+  _i2.Future<List<_i4.Users>> getAllUsers() =>
+      caller.callServerEndpoint<List<_i4.Users>>(
         'users',
         'getAllUsers',
         {},
       );
 
-  _i2.Future<_i3.Users?> getUserById(int id) =>
-      caller.callServerEndpoint<_i3.Users?>(
+  _i2.Future<_i4.Users?> getUserById(int id) =>
+      caller.callServerEndpoint<_i4.Users?>(
         'users',
         'getUserById',
         {'id': id},
       );
 
-  _i2.Future<_i3.Users?> getUserByEmail(String email) =>
-      caller.callServerEndpoint<_i3.Users?>(
+  _i2.Future<_i4.Users?> getUserByEmail(String email) =>
+      caller.callServerEndpoint<_i4.Users?>(
         'users',
         'getUserByEmail',
         {'email': email},
@@ -73,7 +89,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i4.Protocol(),
+          _i5.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -83,9 +99,12 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
+    brands = EndpointBrands(this);
     example = EndpointExample(this);
     users = EndpointUsers(this);
   }
+
+  late final EndpointBrands brands;
 
   late final EndpointExample example;
 
@@ -93,6 +112,7 @@ class Client extends _i1.ServerpodClientShared {
 
   @override
   Map<String, _i1.EndpointRef> get endpointRefLookup => {
+        'brands': brands,
         'example': example,
         'users': users,
       };
