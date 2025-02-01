@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mulli_client",
+            "cwd": "mulli_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mulli_flutter",
+            "cwd": "mulli_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "mulli_flutter (profile mode)",
+            "cwd": "mulli_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "mulli_flutter (release mode)",
+            "cwd": "mulli_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "mulli_server",
+            "cwd": "mulli_server",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}
