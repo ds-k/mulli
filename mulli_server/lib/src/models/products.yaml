@@ -15,6 +15,7 @@ fields:
   region2: String
   region3: String
   region4: String?
+  salesStatus: String
   lat: double
   lng: double
   likesCount: int

@@ -27,6 +27,7 @@ abstract class Products implements _i1.SerializableModel {
     required this.region2,
     required this.region3,
     this.region4,
+    required this.salesStatus,
     required this.lat,
     required this.lng,
     required this.likesCount,
@@ -51,6 +52,7 @@ abstract class Products implements _i1.SerializableModel {
     required String region2,
     required String region3,
     String? region4,
+    required String salesStatus,
     required double lat,
     required double lng,
     required int likesCount,
@@ -76,6 +78,7 @@ abstract class Products implements _i1.SerializableModel {
       region2: jsonSerialization['region2'] as String,
       region3: jsonSerialization['region3'] as String,
       region4: jsonSerialization['region4'] as String?,
+      salesStatus: jsonSerialization['salesStatus'] as String,
       lat: (jsonSerialization['lat'] as num).toDouble(),
       lng: (jsonSerialization['lng'] as num).toDouble(),
       likesCount: jsonSerialization['likesCount'] as int,
@@ -119,6 +122,8 @@ abstract class Products implements _i1.SerializableModel {
 
   String? region4;
 
+  String salesStatus;
+
   double lat;
 
   double lng;
@@ -148,6 +153,7 @@ abstract class Products implements _i1.SerializableModel {
     String? region2,
     String? region3,
     String? region4,
+    String? salesStatus,
     double? lat,
     double? lng,
     int? likesCount,
@@ -173,6 +179,7 @@ abstract class Products implements _i1.SerializableModel {
       'region2': region2,
       'region3': region3,
       if (region4 != null) 'region4': region4,
+      'salesStatus': salesStatus,
       'lat': lat,
       'lng': lng,
       'likesCount': likesCount,
@@ -207,6 +214,7 @@ class _ProductsImpl extends Products {
     required String region2,
     required String region3,
     String? region4,
+    required String salesStatus,
     required double lat,
     required double lng,
     required int likesCount,
@@ -229,6 +237,7 @@ class _ProductsImpl extends Products {
           region2: region2,
           region3: region3,
           region4: region4,
+          salesStatus: salesStatus,
           lat: lat,
           lng: lng,
           likesCount: likesCount,
@@ -254,6 +263,7 @@ class _ProductsImpl extends Products {
     String? region2,
     String? region3,
     Object? region4 = _Undefined,
+    String? salesStatus,
     double? lat,
     double? lng,
     int? likesCount,
@@ -277,6 +287,7 @@ class _ProductsImpl extends Products {
       region2: region2 ?? this.region2,
       region3: region3 ?? this.region3,
       region4: region4 is String? ? region4 : this.region4,
+      salesStatus: salesStatus ?? this.salesStatus,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
       likesCount: likesCount ?? this.likesCount,
