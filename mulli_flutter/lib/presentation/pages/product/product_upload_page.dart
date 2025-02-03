@@ -44,9 +44,7 @@ class _ProductUploadPageState extends State<ProductUploadPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // 사진 업로드 섹션
-                const Text('사진',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('사진', style: TextStyle(fontSize: 14)),
                 const SizedBox(height: 8),
                 Container(
                   height: 100,
@@ -65,9 +63,7 @@ class _ProductUploadPageState extends State<ProductUploadPage> {
                 const SizedBox(height: 24),
 
                 // 클럽 종류 선택
-                const Text('클럽 종류',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('클럽 종류', style: TextStyle(fontSize: 14)),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -86,9 +82,7 @@ class _ProductUploadPageState extends State<ProductUploadPage> {
                 const SizedBox(height: 24),
 
                 // 브랜드 선택
-                const Text('브랜드',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('브랜드', style: TextStyle(fontSize: 14)),
                 const SizedBox(height: 8),
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
@@ -119,9 +113,7 @@ class _ProductUploadPageState extends State<ProductUploadPage> {
                 const SizedBox(height: 24),
 
                 // 제목 입력
-                const Text('제목',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const Text('제목', style: TextStyle(fontSize: 14)),
                 const SizedBox(height: 8),
                 TextFormField(
                   decoration: const InputDecoration(
