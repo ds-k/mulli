@@ -10,6 +10,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'products_images.dart' as _i2;
+import 'products_likes.dart' as _i3;
+import 'products_reports.dart' as _i4;
+import 'chat_rooms.dart' as _i5;
 
 abstract class Products implements _i1.SerializableModel {
   Products._({
@@ -25,16 +29,20 @@ abstract class Products implements _i1.SerializableModel {
     required this.year,
     required this.region1,
     required this.region2,
-    required this.region3,
+    this.region3,
     this.region4,
     required this.salesStatus,
-    required this.lat,
-    required this.lng,
+    this.lat,
+    this.lng,
     required this.likesCount,
     required this.reportsCount,
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
+    this.images,
+    this.likes,
+    this.reports,
+    this.chatRooms,
   });
 
   factory Products({
@@ -50,16 +58,20 @@ abstract class Products implements _i1.SerializableModel {
     required int year,
     required String region1,
     required String region2,
-    required String region3,
+    String? region3,
     String? region4,
     required String salesStatus,
-    required double lat,
-    required double lng,
+    double? lat,
+    double? lng,
     required int likesCount,
     required int reportsCount,
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.ProductsImages>? images,
+    List<_i3.ProductsLikes>? likes,
+    List<_i4.ProductsReports>? reports,
+    List<_i5.ChatRooms>? chatRooms,
   }) = _ProductsImpl;
 
   factory Products.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -76,11 +88,11 @@ abstract class Products implements _i1.SerializableModel {
       year: jsonSerialization['year'] as int,
       region1: jsonSerialization['region1'] as String,
       region2: jsonSerialization['region2'] as String,
-      region3: jsonSerialization['region3'] as String,
+      region3: jsonSerialization['region3'] as String?,
       region4: jsonSerialization['region4'] as String?,
       salesStatus: jsonSerialization['salesStatus'] as String,
-      lat: (jsonSerialization['lat'] as num).toDouble(),
-      lng: (jsonSerialization['lng'] as num).toDouble(),
+      lat: (jsonSerialization['lat'] as num?)?.toDouble(),
+      lng: (jsonSerialization['lng'] as num?)?.toDouble(),
       likesCount: jsonSerialization['likesCount'] as int,
       reportsCount: jsonSerialization['reportsCount'] as int,
       isDeleted: jsonSerialization['isDeleted'] as bool,
@@ -88,6 +100,19 @@ abstract class Products implements _i1.SerializableModel {
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      images: (jsonSerialization['images'] as List?)
+          ?.map((e) => _i2.ProductsImages.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      likes: (jsonSerialization['likes'] as List?)
+          ?.map((e) => _i3.ProductsLikes.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      reports: (jsonSerialization['reports'] as List?)
+          ?.map(
+              (e) => _i4.ProductsReports.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      chatRooms: (jsonSerialization['chatRooms'] as List?)
+          ?.map((e) => _i5.ChatRooms.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -118,15 +143,15 @@ abstract class Products implements _i1.SerializableModel {
 
   String region2;
 
-  String region3;
+  String? region3;
 
   String? region4;
 
   String salesStatus;
 
-  double lat;
+  double? lat;
 
-  double lng;
+  double? lng;
 
   int likesCount;
 
@@ -137,6 +162,14 @@ abstract class Products implements _i1.SerializableModel {
   DateTime createdAt;
 
   DateTime updatedAt;
+
+  List<_i2.ProductsImages>? images;
+
+  List<_i3.ProductsLikes>? likes;
+
+  List<_i4.ProductsReports>? reports;
+
+  List<_i5.ChatRooms>? chatRooms;
 
   Products copyWith({
     int? id,
@@ -161,6 +194,10 @@ abstract class Products implements _i1.SerializableModel {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.ProductsImages>? images,
+    List<_i3.ProductsLikes>? likes,
+    List<_i4.ProductsReports>? reports,
+    List<_i5.ChatRooms>? chatRooms,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -177,16 +214,23 @@ abstract class Products implements _i1.SerializableModel {
       'year': year,
       'region1': region1,
       'region2': region2,
-      'region3': region3,
+      if (region3 != null) 'region3': region3,
       if (region4 != null) 'region4': region4,
       'salesStatus': salesStatus,
-      'lat': lat,
-      'lng': lng,
+      if (lat != null) 'lat': lat,
+      if (lng != null) 'lng': lng,
       'likesCount': likesCount,
       'reportsCount': reportsCount,
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (images != null)
+        'images': images?.toJson(valueToJson: (v) => v.toJson()),
+      if (likes != null) 'likes': likes?.toJson(valueToJson: (v) => v.toJson()),
+      if (reports != null)
+        'reports': reports?.toJson(valueToJson: (v) => v.toJson()),
+      if (chatRooms != null)
+        'chatRooms': chatRooms?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -212,16 +256,20 @@ class _ProductsImpl extends Products {
     required int year,
     required String region1,
     required String region2,
-    required String region3,
+    String? region3,
     String? region4,
     required String salesStatus,
-    required double lat,
-    required double lng,
+    double? lat,
+    double? lng,
     required int likesCount,
     required int reportsCount,
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.ProductsImages>? images,
+    List<_i3.ProductsLikes>? likes,
+    List<_i4.ProductsReports>? reports,
+    List<_i5.ChatRooms>? chatRooms,
   }) : super._(
           id: id,
           userId: userId,
@@ -245,6 +293,10 @@ class _ProductsImpl extends Products {
           isDeleted: isDeleted,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          images: images,
+          likes: likes,
+          reports: reports,
+          chatRooms: chatRooms,
         );
 
   @override
@@ -261,16 +313,20 @@ class _ProductsImpl extends Products {
     int? year,
     String? region1,
     String? region2,
-    String? region3,
+    Object? region3 = _Undefined,
     Object? region4 = _Undefined,
     String? salesStatus,
-    double? lat,
-    double? lng,
+    Object? lat = _Undefined,
+    Object? lng = _Undefined,
     int? likesCount,
     int? reportsCount,
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? images = _Undefined,
+    Object? likes = _Undefined,
+    Object? reports = _Undefined,
+    Object? chatRooms = _Undefined,
   }) {
     return Products(
       id: id is int? ? id : this.id,
@@ -285,16 +341,28 @@ class _ProductsImpl extends Products {
       year: year ?? this.year,
       region1: region1 ?? this.region1,
       region2: region2 ?? this.region2,
-      region3: region3 ?? this.region3,
+      region3: region3 is String? ? region3 : this.region3,
       region4: region4 is String? ? region4 : this.region4,
       salesStatus: salesStatus ?? this.salesStatus,
-      lat: lat ?? this.lat,
-      lng: lng ?? this.lng,
+      lat: lat is double? ? lat : this.lat,
+      lng: lng is double? ? lng : this.lng,
       likesCount: likesCount ?? this.likesCount,
       reportsCount: reportsCount ?? this.reportsCount,
       isDeleted: isDeleted ?? this.isDeleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      images: images is List<_i2.ProductsImages>?
+          ? images
+          : this.images?.map((e0) => e0.copyWith()).toList(),
+      likes: likes is List<_i3.ProductsLikes>?
+          ? likes
+          : this.likes?.map((e0) => e0.copyWith()).toList(),
+      reports: reports is List<_i4.ProductsReports>?
+          ? reports
+          : this.reports?.map((e0) => e0.copyWith()).toList(),
+      chatRooms: chatRooms is List<_i5.ChatRooms>?
+          ? chatRooms
+          : this.chatRooms?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

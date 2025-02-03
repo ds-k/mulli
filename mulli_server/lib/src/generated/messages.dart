@@ -75,6 +75,10 @@ abstract class Messages implements _i1.TableRow, _i1.ProtocolSerialization {
 
   DateTime updatedAt;
 
+  int? _chatRoomsMessagesChatRoomsId;
+
+  int? _usersMessagesUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -101,6 +105,10 @@ abstract class Messages implements _i1.TableRow, _i1.ProtocolSerialization {
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_chatRoomsMessagesChatRoomsId != null)
+        '_chatRoomsMessagesChatRoomsId': _chatRoomsMessagesChatRoomsId,
+      if (_usersMessagesUsersId != null)
+        '_usersMessagesUsersId': _usersMessagesUsersId,
     };
   }
 
@@ -200,6 +208,66 @@ class _MessagesImpl extends Messages {
   }
 }
 
+class MessagesImplicit extends _MessagesImpl {
+  MessagesImplicit._({
+    int? id,
+    required int chatRoomId,
+    required int senderId,
+    required String messageType,
+    required String content,
+    required bool isRead,
+    required bool isDeleted,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_chatRoomsMessagesChatRoomsId,
+    this.$_usersMessagesUsersId,
+  }) : super(
+          id: id,
+          chatRoomId: chatRoomId,
+          senderId: senderId,
+          messageType: messageType,
+          content: content,
+          isRead: isRead,
+          isDeleted: isDeleted,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory MessagesImplicit(
+    Messages messages, {
+    int? $_chatRoomsMessagesChatRoomsId,
+    int? $_usersMessagesUsersId,
+  }) {
+    return MessagesImplicit._(
+      id: messages.id,
+      chatRoomId: messages.chatRoomId,
+      senderId: messages.senderId,
+      messageType: messages.messageType,
+      content: messages.content,
+      isRead: messages.isRead,
+      isDeleted: messages.isDeleted,
+      createdAt: messages.createdAt,
+      updatedAt: messages.updatedAt,
+      $_chatRoomsMessagesChatRoomsId: $_chatRoomsMessagesChatRoomsId,
+      $_usersMessagesUsersId: $_usersMessagesUsersId,
+    );
+  }
+
+  int? $_chatRoomsMessagesChatRoomsId;
+
+  int? $_usersMessagesUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_chatRoomsMessagesChatRoomsId': $_chatRoomsMessagesChatRoomsId,
+      '_usersMessagesUsersId': $_usersMessagesUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class MessagesTable extends _i1.Table {
   MessagesTable({super.tableRelation}) : super(tableName: 'messages') {
     chatRoomId = _i1.ColumnInt(
@@ -234,6 +302,14 @@ class MessagesTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_chatRoomsMessagesChatRoomsId = _i1.ColumnInt(
+      '_chatRoomsMessagesChatRoomsId',
+      this,
+    );
+    $_usersMessagesUsersId = _i1.ColumnInt(
+      '_usersMessagesUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt chatRoomId;
@@ -252,6 +328,10 @@ class MessagesTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_chatRoomsMessagesChatRoomsId;
+
+  late final _i1.ColumnInt $_usersMessagesUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -263,6 +343,8 @@ class MessagesTable extends _i1.Table {
         isDeleted,
         createdAt,
         updatedAt,
+        $_chatRoomsMessagesChatRoomsId,
+        $_usersMessagesUsersId,
       ];
 }
 

@@ -61,6 +61,10 @@ abstract class ProductsLikes
 
   DateTime updatedAt;
 
+  int? _productsLikesProductsId;
+
+  int? _usersProductlikesUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -81,6 +85,10 @@ abstract class ProductsLikes
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_productsLikesProductsId != null)
+        '_productsLikesProductsId': _productsLikesProductsId,
+      if (_usersProductlikesUsersId != null)
+        '_usersProductlikesUsersId': _usersProductlikesUsersId,
     };
   }
 
@@ -165,6 +173,57 @@ class _ProductsLikesImpl extends ProductsLikes {
   }
 }
 
+class ProductsLikesImplicit extends _ProductsLikesImpl {
+  ProductsLikesImplicit._({
+    int? id,
+    required int productId,
+    required int userId,
+    required bool isDeleted,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_productsLikesProductsId,
+    this.$_usersProductlikesUsersId,
+  }) : super(
+          id: id,
+          productId: productId,
+          userId: userId,
+          isDeleted: isDeleted,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory ProductsLikesImplicit(
+    ProductsLikes productsLikes, {
+    int? $_productsLikesProductsId,
+    int? $_usersProductlikesUsersId,
+  }) {
+    return ProductsLikesImplicit._(
+      id: productsLikes.id,
+      productId: productsLikes.productId,
+      userId: productsLikes.userId,
+      isDeleted: productsLikes.isDeleted,
+      createdAt: productsLikes.createdAt,
+      updatedAt: productsLikes.updatedAt,
+      $_productsLikesProductsId: $_productsLikesProductsId,
+      $_usersProductlikesUsersId: $_usersProductlikesUsersId,
+    );
+  }
+
+  int? $_productsLikesProductsId;
+
+  int? $_usersProductlikesUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_productsLikesProductsId': $_productsLikesProductsId,
+      '_usersProductlikesUsersId': $_usersProductlikesUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class ProductsLikesTable extends _i1.Table {
   ProductsLikesTable({super.tableRelation})
       : super(tableName: 'products_likes') {
@@ -188,6 +247,14 @@ class ProductsLikesTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_productsLikesProductsId = _i1.ColumnInt(
+      '_productsLikesProductsId',
+      this,
+    );
+    $_usersProductlikesUsersId = _i1.ColumnInt(
+      '_usersProductlikesUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt productId;
@@ -200,6 +267,10 @@ class ProductsLikesTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_productsLikesProductsId;
+
+  late final _i1.ColumnInt $_usersProductlikesUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -208,6 +279,8 @@ class ProductsLikesTable extends _i1.Table {
         isDeleted,
         createdAt,
         updatedAt,
+        $_productsLikesProductsId,
+        $_usersProductlikesUsersId,
       ];
 }
 

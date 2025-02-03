@@ -60,6 +60,10 @@ abstract class UserTerms implements _i1.TableRow, _i1.ProtocolSerialization {
 
   DateTime createdAt;
 
+  int? _termsAndConditionsUsertermsTermsAndConditionsId;
+
+  int? _usersUsertermsUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -80,6 +84,11 @@ abstract class UserTerms implements _i1.TableRow, _i1.ProtocolSerialization {
       'isAgreed': isAgreed,
       'agreedAt': agreedAt.toJson(),
       'createdAt': createdAt.toJson(),
+      if (_termsAndConditionsUsertermsTermsAndConditionsId != null)
+        '_termsAndConditionsUsertermsTermsAndConditionsId':
+            _termsAndConditionsUsertermsTermsAndConditionsId,
+      if (_usersUsertermsUsersId != null)
+        '_usersUsertermsUsersId': _usersUsertermsUsersId,
     };
   }
 
@@ -164,6 +173,59 @@ class _UserTermsImpl extends UserTerms {
   }
 }
 
+class UserTermsImplicit extends _UserTermsImpl {
+  UserTermsImplicit._({
+    int? id,
+    required int userId,
+    required int termId,
+    required bool isAgreed,
+    required DateTime agreedAt,
+    required DateTime createdAt,
+    this.$_termsAndConditionsUsertermsTermsAndConditionsId,
+    this.$_usersUsertermsUsersId,
+  }) : super(
+          id: id,
+          userId: userId,
+          termId: termId,
+          isAgreed: isAgreed,
+          agreedAt: agreedAt,
+          createdAt: createdAt,
+        );
+
+  factory UserTermsImplicit(
+    UserTerms userTerms, {
+    int? $_termsAndConditionsUsertermsTermsAndConditionsId,
+    int? $_usersUsertermsUsersId,
+  }) {
+    return UserTermsImplicit._(
+      id: userTerms.id,
+      userId: userTerms.userId,
+      termId: userTerms.termId,
+      isAgreed: userTerms.isAgreed,
+      agreedAt: userTerms.agreedAt,
+      createdAt: userTerms.createdAt,
+      $_termsAndConditionsUsertermsTermsAndConditionsId:
+          $_termsAndConditionsUsertermsTermsAndConditionsId,
+      $_usersUsertermsUsersId: $_usersUsertermsUsersId,
+    );
+  }
+
+  int? $_termsAndConditionsUsertermsTermsAndConditionsId;
+
+  int? $_usersUsertermsUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_termsAndConditionsUsertermsTermsAndConditionsId':
+          $_termsAndConditionsUsertermsTermsAndConditionsId,
+      '_usersUsertermsUsersId': $_usersUsertermsUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class UserTermsTable extends _i1.Table {
   UserTermsTable({super.tableRelation}) : super(tableName: 'user_terms') {
     userId = _i1.ColumnInt(
@@ -186,6 +248,14 @@ class UserTermsTable extends _i1.Table {
       'createdAt',
       this,
     );
+    $_termsAndConditionsUsertermsTermsAndConditionsId = _i1.ColumnInt(
+      '_termsAndConditionsUsertermsTermsAndConditionsId',
+      this,
+    );
+    $_usersUsertermsUsersId = _i1.ColumnInt(
+      '_usersUsertermsUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt userId;
@@ -198,6 +268,10 @@ class UserTermsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime createdAt;
 
+  late final _i1.ColumnInt $_termsAndConditionsUsertermsTermsAndConditionsId;
+
+  late final _i1.ColumnInt $_usersUsertermsUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -206,6 +280,8 @@ class UserTermsTable extends _i1.Table {
         isAgreed,
         agreedAt,
         createdAt,
+        $_termsAndConditionsUsertermsTermsAndConditionsId,
+        $_usersUsertermsUsersId,
       ];
 }
 

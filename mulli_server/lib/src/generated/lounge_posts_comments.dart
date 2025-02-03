@@ -76,6 +76,10 @@ abstract class LoungePostsComments
 
   DateTime updatedAt;
 
+  int? _loungePostsCommentsLoungePostsId;
+
+  int? _usersLoungecommentsUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -102,6 +106,10 @@ abstract class LoungePostsComments
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_loungePostsCommentsLoungePostsId != null)
+        '_loungePostsCommentsLoungePostsId': _loungePostsCommentsLoungePostsId,
+      if (_usersLoungecommentsUsersId != null)
+        '_usersLoungecommentsUsersId': _usersLoungecommentsUsersId,
     };
   }
 
@@ -201,6 +209,66 @@ class _LoungePostsCommentsImpl extends LoungePostsComments {
   }
 }
 
+class LoungePostsCommentsImplicit extends _LoungePostsCommentsImpl {
+  LoungePostsCommentsImplicit._({
+    int? id,
+    required int userId,
+    required int postId,
+    required String content,
+    required int likesCount,
+    required int reportsCount,
+    required bool isDeleted,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_loungePostsCommentsLoungePostsId,
+    this.$_usersLoungecommentsUsersId,
+  }) : super(
+          id: id,
+          userId: userId,
+          postId: postId,
+          content: content,
+          likesCount: likesCount,
+          reportsCount: reportsCount,
+          isDeleted: isDeleted,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory LoungePostsCommentsImplicit(
+    LoungePostsComments loungePostsComments, {
+    int? $_loungePostsCommentsLoungePostsId,
+    int? $_usersLoungecommentsUsersId,
+  }) {
+    return LoungePostsCommentsImplicit._(
+      id: loungePostsComments.id,
+      userId: loungePostsComments.userId,
+      postId: loungePostsComments.postId,
+      content: loungePostsComments.content,
+      likesCount: loungePostsComments.likesCount,
+      reportsCount: loungePostsComments.reportsCount,
+      isDeleted: loungePostsComments.isDeleted,
+      createdAt: loungePostsComments.createdAt,
+      updatedAt: loungePostsComments.updatedAt,
+      $_loungePostsCommentsLoungePostsId: $_loungePostsCommentsLoungePostsId,
+      $_usersLoungecommentsUsersId: $_usersLoungecommentsUsersId,
+    );
+  }
+
+  int? $_loungePostsCommentsLoungePostsId;
+
+  int? $_usersLoungecommentsUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_loungePostsCommentsLoungePostsId': $_loungePostsCommentsLoungePostsId,
+      '_usersLoungecommentsUsersId': $_usersLoungecommentsUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class LoungePostsCommentsTable extends _i1.Table {
   LoungePostsCommentsTable({super.tableRelation})
       : super(tableName: 'lounge_posts_comments') {
@@ -236,6 +304,14 @@ class LoungePostsCommentsTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_loungePostsCommentsLoungePostsId = _i1.ColumnInt(
+      '_loungePostsCommentsLoungePostsId',
+      this,
+    );
+    $_usersLoungecommentsUsersId = _i1.ColumnInt(
+      '_usersLoungecommentsUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt userId;
@@ -254,6 +330,10 @@ class LoungePostsCommentsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_loungePostsCommentsLoungePostsId;
+
+  late final _i1.ColumnInt $_usersLoungecommentsUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -265,6 +345,8 @@ class LoungePostsCommentsTable extends _i1.Table {
         isDeleted,
         createdAt,
         updatedAt,
+        $_loungePostsCommentsLoungePostsId,
+        $_usersLoungecommentsUsersId,
       ];
 }
 

@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'messages.dart' as _i2;
 
 abstract class ChatRooms implements _i1.SerializableModel {
   ChatRooms._({
@@ -20,6 +21,7 @@ abstract class ChatRooms implements _i1.SerializableModel {
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
+    this.messages,
   });
 
   factory ChatRooms({
@@ -30,6 +32,7 @@ abstract class ChatRooms implements _i1.SerializableModel {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.Messages>? messages,
   }) = _ChatRoomsImpl;
 
   factory ChatRooms.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -43,6 +46,9 @@ abstract class ChatRooms implements _i1.SerializableModel {
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      messages: (jsonSerialization['messages'] as List?)
+          ?.map((e) => _i2.Messages.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -63,6 +69,8 @@ abstract class ChatRooms implements _i1.SerializableModel {
 
   DateTime updatedAt;
 
+  List<_i2.Messages>? messages;
+
   ChatRooms copyWith({
     int? id,
     int? productId,
@@ -71,6 +79,7 @@ abstract class ChatRooms implements _i1.SerializableModel {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.Messages>? messages,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -82,6 +91,8 @@ abstract class ChatRooms implements _i1.SerializableModel {
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (messages != null)
+        'messages': messages?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -102,6 +113,7 @@ class _ChatRoomsImpl extends ChatRooms {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.Messages>? messages,
   }) : super._(
           id: id,
           productId: productId,
@@ -110,6 +122,7 @@ class _ChatRoomsImpl extends ChatRooms {
           isDeleted: isDeleted,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          messages: messages,
         );
 
   @override
@@ -121,6 +134,7 @@ class _ChatRoomsImpl extends ChatRooms {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? messages = _Undefined,
   }) {
     return ChatRooms(
       id: id is int? ? id : this.id,
@@ -130,6 +144,9 @@ class _ChatRoomsImpl extends ChatRooms {
       isDeleted: isDeleted ?? this.isDeleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      messages: messages is List<_i2.Messages>?
+          ? messages
+          : this.messages?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

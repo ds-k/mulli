@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'user_terms.dart' as _i2;
 
 abstract class TermsAndConditions
     implements _i1.TableRow, _i1.ProtocolSerialization {
@@ -21,6 +22,7 @@ abstract class TermsAndConditions
     required this.version,
     required this.createdAt,
     required this.updatedAt,
+    this.userTerms,
   });
 
   factory TermsAndConditions({
@@ -31,6 +33,7 @@ abstract class TermsAndConditions
     required int version,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.UserTerms>? userTerms,
   }) = _TermsAndConditionsImpl;
 
   factory TermsAndConditions.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -44,6 +47,9 @@ abstract class TermsAndConditions
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      userTerms: (jsonSerialization['userTerms'] as List?)
+          ?.map((e) => _i2.UserTerms.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -66,6 +72,8 @@ abstract class TermsAndConditions
 
   DateTime updatedAt;
 
+  List<_i2.UserTerms>? userTerms;
+
   @override
   _i1.Table get table => t;
 
@@ -77,6 +85,7 @@ abstract class TermsAndConditions
     int? version,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.UserTerms>? userTerms,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -88,6 +97,8 @@ abstract class TermsAndConditions
       'version': version,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (userTerms != null)
+        'userTerms': userTerms?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -101,11 +112,15 @@ abstract class TermsAndConditions
       'version': version,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (userTerms != null)
+        'userTerms':
+            userTerms?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
   }
 
-  static TermsAndConditionsInclude include() {
-    return TermsAndConditionsInclude._();
+  static TermsAndConditionsInclude include(
+      {_i2.UserTermsIncludeList? userTerms}) {
+    return TermsAndConditionsInclude._(userTerms: userTerms);
   }
 
   static TermsAndConditionsIncludeList includeList({
@@ -145,6 +160,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
     required int version,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.UserTerms>? userTerms,
   }) : super._(
           id: id,
           title: title,
@@ -153,6 +169,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
           version: version,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          userTerms: userTerms,
         );
 
   @override
@@ -164,6 +181,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
     int? version,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? userTerms = _Undefined,
   }) {
     return TermsAndConditions(
       id: id is int? ? id : this.id,
@@ -173,6 +191,9 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
       version: version ?? this.version,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      userTerms: userTerms is List<_i2.UserTerms>?
+          ? userTerms
+          : this.userTerms?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }
@@ -218,6 +239,43 @@ class TermsAndConditionsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  _i2.UserTermsTable? ___userTerms;
+
+  _i1.ManyRelation<_i2.UserTermsTable>? _userTerms;
+
+  _i2.UserTermsTable get __userTerms {
+    if (___userTerms != null) return ___userTerms!;
+    ___userTerms = _i1.createRelationTable(
+      relationFieldName: '__userTerms',
+      field: TermsAndConditions.t.id,
+      foreignField:
+          _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.UserTermsTable(tableRelation: foreignTableRelation),
+    );
+    return ___userTerms!;
+  }
+
+  _i1.ManyRelation<_i2.UserTermsTable> get userTerms {
+    if (_userTerms != null) return _userTerms!;
+    var relationTable = _i1.createRelationTable(
+      relationFieldName: 'userTerms',
+      field: TermsAndConditions.t.id,
+      foreignField:
+          _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.UserTermsTable(tableRelation: foreignTableRelation),
+    );
+    _userTerms = _i1.ManyRelation<_i2.UserTermsTable>(
+      tableWithRelations: relationTable,
+      table: _i2.UserTermsTable(
+          tableRelation: relationTable.tableRelation!.lastRelation),
+    );
+    return _userTerms!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -228,13 +286,25 @@ class TermsAndConditionsTable extends _i1.Table {
         createdAt,
         updatedAt,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'userTerms') {
+      return __userTerms;
+    }
+    return null;
+  }
 }
 
 class TermsAndConditionsInclude extends _i1.IncludeObject {
-  TermsAndConditionsInclude._();
+  TermsAndConditionsInclude._({_i2.UserTermsIncludeList? userTerms}) {
+    _userTerms = userTerms;
+  }
+
+  _i2.UserTermsIncludeList? _userTerms;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'userTerms': _userTerms};
 
   @override
   _i1.Table get table => TermsAndConditions.t;
@@ -263,6 +333,14 @@ class TermsAndConditionsIncludeList extends _i1.IncludeList {
 class TermsAndConditionsRepository {
   const TermsAndConditionsRepository._();
 
+  final attach = const TermsAndConditionsAttachRepository._();
+
+  final attachRow = const TermsAndConditionsAttachRowRepository._();
+
+  final detach = const TermsAndConditionsDetachRepository._();
+
+  final detachRow = const TermsAndConditionsDetachRowRepository._();
+
   Future<List<TermsAndConditions>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<TermsAndConditionsTable>? where,
@@ -272,6 +350,7 @@ class TermsAndConditionsRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<TermsAndConditionsTable>? orderByList,
     _i1.Transaction? transaction,
+    TermsAndConditionsInclude? include,
   }) async {
     return session.db.find<TermsAndConditions>(
       where: where?.call(TermsAndConditions.t),
@@ -281,6 +360,7 @@ class TermsAndConditionsRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -292,6 +372,7 @@ class TermsAndConditionsRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<TermsAndConditionsTable>? orderByList,
     _i1.Transaction? transaction,
+    TermsAndConditionsInclude? include,
   }) async {
     return session.db.findFirstRow<TermsAndConditions>(
       where: where?.call(TermsAndConditions.t),
@@ -300,6 +381,7 @@ class TermsAndConditionsRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -307,10 +389,12 @@ class TermsAndConditionsRepository {
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
+    TermsAndConditionsInclude? include,
   }) async {
     return session.db.findById<TermsAndConditions>(
       id,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -404,6 +488,123 @@ class TermsAndConditionsRepository {
     return session.db.count<TermsAndConditions>(
       where: where?.call(TermsAndConditions.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+}
+
+class TermsAndConditionsAttachRepository {
+  const TermsAndConditionsAttachRepository._();
+
+  Future<void> userTerms(
+    _i1.Session session,
+    TermsAndConditions termsAndConditions,
+    List<_i2.UserTerms> userTerms, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (userTerms.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('userTerms.id');
+    }
+    if (termsAndConditions.id == null) {
+      throw ArgumentError.notNull('termsAndConditions.id');
+    }
+
+    var $userTerms = userTerms
+        .map((e) => _i2.UserTermsImplicit(
+              e,
+              $_termsAndConditionsUsertermsTermsAndConditionsId:
+                  termsAndConditions.id,
+            ))
+        .toList();
+    await session.db.update<_i2.UserTerms>(
+      $userTerms,
+      columns: [
+        _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId
+      ],
+      transaction: transaction,
+    );
+  }
+}
+
+class TermsAndConditionsAttachRowRepository {
+  const TermsAndConditionsAttachRowRepository._();
+
+  Future<void> userTerms(
+    _i1.Session session,
+    TermsAndConditions termsAndConditions,
+    _i2.UserTerms userTerms, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (userTerms.id == null) {
+      throw ArgumentError.notNull('userTerms.id');
+    }
+    if (termsAndConditions.id == null) {
+      throw ArgumentError.notNull('termsAndConditions.id');
+    }
+
+    var $userTerms = _i2.UserTermsImplicit(
+      userTerms,
+      $_termsAndConditionsUsertermsTermsAndConditionsId: termsAndConditions.id,
+    );
+    await session.db.updateRow<_i2.UserTerms>(
+      $userTerms,
+      columns: [
+        _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId
+      ],
+      transaction: transaction,
+    );
+  }
+}
+
+class TermsAndConditionsDetachRepository {
+  const TermsAndConditionsDetachRepository._();
+
+  Future<void> userTerms(
+    _i1.Session session,
+    List<_i2.UserTerms> userTerms, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (userTerms.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('userTerms.id');
+    }
+
+    var $userTerms = userTerms
+        .map((e) => _i2.UserTermsImplicit(
+              e,
+              $_termsAndConditionsUsertermsTermsAndConditionsId: null,
+            ))
+        .toList();
+    await session.db.update<_i2.UserTerms>(
+      $userTerms,
+      columns: [
+        _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId
+      ],
+      transaction: transaction,
+    );
+  }
+}
+
+class TermsAndConditionsDetachRowRepository {
+  const TermsAndConditionsDetachRowRepository._();
+
+  Future<void> userTerms(
+    _i1.Session session,
+    _i2.UserTerms userTerms, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (userTerms.id == null) {
+      throw ArgumentError.notNull('userTerms.id');
+    }
+
+    var $userTerms = _i2.UserTermsImplicit(
+      userTerms,
+      $_termsAndConditionsUsertermsTermsAndConditionsId: null,
+    );
+    await session.db.updateRow<_i2.UserTerms>(
+      $userTerms,
+      columns: [
+        _i2.UserTerms.t.$_termsAndConditionsUsertermsTermsAndConditionsId
+      ],
       transaction: transaction,
     );
   }
