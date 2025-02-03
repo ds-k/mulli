@@ -2,6 +2,17 @@ brands:
   - getAllBrands:
 example:
   - hello:
+products:
+  - getAllProducts:
+  - getProductsByBrand:
+  - getProductsByRegion:
+  - getProductsByClubType:
+  - getProductsByUser:
+  - getProductById:
+  - toggleLike:
+  - reportProduct:
+  - updateProduct:
+  - deleteProduct:
 users:
   - getAllUsers:
   - getUserById:

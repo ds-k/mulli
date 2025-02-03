@@ -13,13 +13,17 @@ fields:
   year: int
   region1: String
   region2: String
-  region3: String
+  region3: String?
   region4: String?
   salesStatus: String
-  lat: double
-  lng: double
+  lat: double?
+  lng: double?
   likesCount: int
   reportsCount: int
   isDeleted: bool
   createdAt: DateTime
   updatedAt: DateTime
+  images: List<ProductsImages>?, relation
+  likes: List<ProductsLikes>?, relation
+  reports: List<ProductsReports>?, relation
+  chatRooms: List<ChatRooms>?, relation

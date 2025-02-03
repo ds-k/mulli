@@ -8,3 +8,4 @@ fields:
   isDeleted: bool
   createdAt: DateTime
   updatedAt: DateTime
+  messages: List<Messages>?, relation

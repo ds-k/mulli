@@ -7,3 +7,4 @@ fields:
   logoImageUrl: String
   createdAt: DateTime
   updatedAt: DateTime
+  products: List<Products>?, relation
