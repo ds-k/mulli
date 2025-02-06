@@ -25,7 +25,9 @@ import 'products_reports.dart' as _i13;
 import 'terms_and_conditions.dart' as _i14;
 import 'user_terms.dart' as _i15;
 import 'users.dart' as _i16;
-import 'package:mulli_client/src/protocol/users.dart' as _i17;
+import 'package:mulli_client/src/protocol/brands.dart' as _i17;
+import 'package:mulli_client/src/protocol/products.dart' as _i18;
+import 'package:mulli_client/src/protocol/users.dart' as _i19;
 export 'brands.dart';
 export 'chat_rooms.dart';
 export 'example.dart';
@@ -148,8 +150,143 @@ class Protocol extends _i1.SerializationManager {
     if (t == _i1.getType<_i16.Users?>()) {
       return (data != null ? _i16.Users.fromJson(data) : null) as T;
     }
-    if (t == List<_i17.Users>) {
-      return (data as List).map((e) => deserialize<_i17.Users>(e)).toList()
+    if (t == _i1.getType<List<_i10.Products>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Products>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i9.Messages>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i9.Messages>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i6.LoungePostsComments>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i6.LoungePostsComments>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i7.LoungePostsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i7.LoungePostsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i8.LoungePostsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i8.LoungePostsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i11.ProductsImages>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i11.ProductsImages>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.ProductsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i12.ProductsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i13.ProductsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i13.ProductsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i3.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i3.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i15.UserTerms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i15.UserTerms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Products>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Products>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i5.LoungePosts>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i5.LoungePosts>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i6.LoungePostsComments>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i6.LoungePostsComments>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.ProductsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i12.ProductsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i13.ProductsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i13.ProductsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i7.LoungePostsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i7.LoungePostsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i8.LoungePostsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i8.LoungePostsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i3.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i3.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i3.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i3.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i9.Messages>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i9.Messages>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i15.UserTerms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i15.UserTerms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i17.Brands>) {
+      return (data as List).map((e) => deserialize<_i17.Brands>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i18.Products>) {
+      return (data as List).map((e) => deserialize<_i18.Products>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i19.Users>) {
+      return (data as List).map((e) => deserialize<_i19.Users>(e)).toList()
           as dynamic;
     }
     return super.deserialize<T>(data, t);

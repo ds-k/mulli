@@ -1,3 +1,4 @@
+import 'package:mulli_server/src/seeding/brands_seeder.dart';
 import 'package:serverpod/serverpod.dart';
 import 'package:mulli_server/src/web/routes/root.dart';
 import 'package:mulli_server/src/generated/protocol.dart';
@@ -18,6 +19,12 @@ class Server extends Serverpod {
     } finally {
       session.close();
     }
+  }
+
+  Future<void> seedBrands() async {
+    final session = await createSession();
+    await BrandsSeeder(session).run();
+    print('Brands seeding completed successfully.');
   }
 }
 

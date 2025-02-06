@@ -10,6 +10,9 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'lounge_posts_comments.dart' as _i2;
+import 'lounge_posts_likes.dart' as _i3;
+import 'lounge_posts_reports.dart' as _i4;
 
 abstract class LoungePosts implements _i1.SerializableModel {
   LoungePosts._({
@@ -21,6 +24,9 @@ abstract class LoungePosts implements _i1.SerializableModel {
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
+    this.comments,
+    this.likes,
+    this.reports,
   });
 
   factory LoungePosts({
@@ -32,6 +38,9 @@ abstract class LoungePosts implements _i1.SerializableModel {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.LoungePostsComments>? comments,
+    List<_i3.LoungePostsLikes>? likes,
+    List<_i4.LoungePostsReports>? reports,
   }) = _LoungePostsImpl;
 
   factory LoungePosts.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -46,6 +55,18 @@ abstract class LoungePosts implements _i1.SerializableModel {
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      comments: (jsonSerialization['comments'] as List?)
+          ?.map((e) =>
+              _i2.LoungePostsComments.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      likes: (jsonSerialization['likes'] as List?)
+          ?.map(
+              (e) => _i3.LoungePostsLikes.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+      reports: (jsonSerialization['reports'] as List?)
+          ?.map((e) =>
+              _i4.LoungePostsReports.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -68,6 +89,12 @@ abstract class LoungePosts implements _i1.SerializableModel {
 
   DateTime updatedAt;
 
+  List<_i2.LoungePostsComments>? comments;
+
+  List<_i3.LoungePostsLikes>? likes;
+
+  List<_i4.LoungePostsReports>? reports;
+
   LoungePosts copyWith({
     int? id,
     int? userId,
@@ -77,6 +104,9 @@ abstract class LoungePosts implements _i1.SerializableModel {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.LoungePostsComments>? comments,
+    List<_i3.LoungePostsLikes>? likes,
+    List<_i4.LoungePostsReports>? reports,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -89,6 +119,11 @@ abstract class LoungePosts implements _i1.SerializableModel {
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (comments != null)
+        'comments': comments?.toJson(valueToJson: (v) => v.toJson()),
+      if (likes != null) 'likes': likes?.toJson(valueToJson: (v) => v.toJson()),
+      if (reports != null)
+        'reports': reports?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -110,6 +145,9 @@ class _LoungePostsImpl extends LoungePosts {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.LoungePostsComments>? comments,
+    List<_i3.LoungePostsLikes>? likes,
+    List<_i4.LoungePostsReports>? reports,
   }) : super._(
           id: id,
           userId: userId,
@@ -119,6 +157,9 @@ class _LoungePostsImpl extends LoungePosts {
           isDeleted: isDeleted,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          comments: comments,
+          likes: likes,
+          reports: reports,
         );
 
   @override
@@ -131,6 +172,9 @@ class _LoungePostsImpl extends LoungePosts {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? comments = _Undefined,
+    Object? likes = _Undefined,
+    Object? reports = _Undefined,
   }) {
     return LoungePosts(
       id: id is int? ? id : this.id,
@@ -141,6 +185,15 @@ class _LoungePostsImpl extends LoungePosts {
       isDeleted: isDeleted ?? this.isDeleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      comments: comments is List<_i2.LoungePostsComments>?
+          ? comments
+          : this.comments?.map((e0) => e0.copyWith()).toList(),
+      likes: likes is List<_i3.LoungePostsLikes>?
+          ? likes
+          : this.likes?.map((e0) => e0.copyWith()).toList(),
+      reports: reports is List<_i4.LoungePostsReports>?
+          ? reports
+          : this.reports?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

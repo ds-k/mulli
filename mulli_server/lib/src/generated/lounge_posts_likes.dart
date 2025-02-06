@@ -61,6 +61,10 @@ abstract class LoungePostsLikes
 
   DateTime updatedAt;
 
+  int? _loungePostsLikesLoungePostsId;
+
+  int? _usersPostlikesUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -81,6 +85,10 @@ abstract class LoungePostsLikes
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_loungePostsLikesLoungePostsId != null)
+        '_loungePostsLikesLoungePostsId': _loungePostsLikesLoungePostsId,
+      if (_usersPostlikesUsersId != null)
+        '_usersPostlikesUsersId': _usersPostlikesUsersId,
     };
   }
 
@@ -165,6 +173,57 @@ class _LoungePostsLikesImpl extends LoungePostsLikes {
   }
 }
 
+class LoungePostsLikesImplicit extends _LoungePostsLikesImpl {
+  LoungePostsLikesImplicit._({
+    int? id,
+    required int postId,
+    required int userId,
+    required bool isDeleted,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_loungePostsLikesLoungePostsId,
+    this.$_usersPostlikesUsersId,
+  }) : super(
+          id: id,
+          postId: postId,
+          userId: userId,
+          isDeleted: isDeleted,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory LoungePostsLikesImplicit(
+    LoungePostsLikes loungePostsLikes, {
+    int? $_loungePostsLikesLoungePostsId,
+    int? $_usersPostlikesUsersId,
+  }) {
+    return LoungePostsLikesImplicit._(
+      id: loungePostsLikes.id,
+      postId: loungePostsLikes.postId,
+      userId: loungePostsLikes.userId,
+      isDeleted: loungePostsLikes.isDeleted,
+      createdAt: loungePostsLikes.createdAt,
+      updatedAt: loungePostsLikes.updatedAt,
+      $_loungePostsLikesLoungePostsId: $_loungePostsLikesLoungePostsId,
+      $_usersPostlikesUsersId: $_usersPostlikesUsersId,
+    );
+  }
+
+  int? $_loungePostsLikesLoungePostsId;
+
+  int? $_usersPostlikesUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_loungePostsLikesLoungePostsId': $_loungePostsLikesLoungePostsId,
+      '_usersPostlikesUsersId': $_usersPostlikesUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class LoungePostsLikesTable extends _i1.Table {
   LoungePostsLikesTable({super.tableRelation})
       : super(tableName: 'lounge_posts_likes') {
@@ -188,6 +247,14 @@ class LoungePostsLikesTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_loungePostsLikesLoungePostsId = _i1.ColumnInt(
+      '_loungePostsLikesLoungePostsId',
+      this,
+    );
+    $_usersPostlikesUsersId = _i1.ColumnInt(
+      '_usersPostlikesUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt postId;
@@ -200,6 +267,10 @@ class LoungePostsLikesTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_loungePostsLikesLoungePostsId;
+
+  late final _i1.ColumnInt $_usersPostlikesUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -208,6 +279,8 @@ class LoungePostsLikesTable extends _i1.Table {
         isDeleted,
         createdAt,
         updatedAt,
+        $_loungePostsLikesLoungePostsId,
+        $_usersPostlikesUsersId,
       ];
 }
 

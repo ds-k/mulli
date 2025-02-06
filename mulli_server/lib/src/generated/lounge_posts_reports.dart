@@ -61,6 +61,10 @@ abstract class LoungePostsReports
 
   DateTime updatedAt;
 
+  int? _loungePostsReportsLoungePostsId;
+
+  int? _usersPostreportsUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -81,6 +85,10 @@ abstract class LoungePostsReports
       'reason': reason,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_loungePostsReportsLoungePostsId != null)
+        '_loungePostsReportsLoungePostsId': _loungePostsReportsLoungePostsId,
+      if (_usersPostreportsUsersId != null)
+        '_usersPostreportsUsersId': _usersPostreportsUsersId,
     };
   }
 
@@ -165,6 +173,57 @@ class _LoungePostsReportsImpl extends LoungePostsReports {
   }
 }
 
+class LoungePostsReportsImplicit extends _LoungePostsReportsImpl {
+  LoungePostsReportsImplicit._({
+    int? id,
+    required int userId,
+    required int postId,
+    required String reason,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_loungePostsReportsLoungePostsId,
+    this.$_usersPostreportsUsersId,
+  }) : super(
+          id: id,
+          userId: userId,
+          postId: postId,
+          reason: reason,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory LoungePostsReportsImplicit(
+    LoungePostsReports loungePostsReports, {
+    int? $_loungePostsReportsLoungePostsId,
+    int? $_usersPostreportsUsersId,
+  }) {
+    return LoungePostsReportsImplicit._(
+      id: loungePostsReports.id,
+      userId: loungePostsReports.userId,
+      postId: loungePostsReports.postId,
+      reason: loungePostsReports.reason,
+      createdAt: loungePostsReports.createdAt,
+      updatedAt: loungePostsReports.updatedAt,
+      $_loungePostsReportsLoungePostsId: $_loungePostsReportsLoungePostsId,
+      $_usersPostreportsUsersId: $_usersPostreportsUsersId,
+    );
+  }
+
+  int? $_loungePostsReportsLoungePostsId;
+
+  int? $_usersPostreportsUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_loungePostsReportsLoungePostsId': $_loungePostsReportsLoungePostsId,
+      '_usersPostreportsUsersId': $_usersPostreportsUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class LoungePostsReportsTable extends _i1.Table {
   LoungePostsReportsTable({super.tableRelation})
       : super(tableName: 'lounge_posts_reports') {
@@ -188,6 +247,14 @@ class LoungePostsReportsTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_loungePostsReportsLoungePostsId = _i1.ColumnInt(
+      '_loungePostsReportsLoungePostsId',
+      this,
+    );
+    $_usersPostreportsUsersId = _i1.ColumnInt(
+      '_usersPostreportsUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt userId;
@@ -200,6 +267,10 @@ class LoungePostsReportsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_loungePostsReportsLoungePostsId;
+
+  late final _i1.ColumnInt $_usersPostreportsUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -208,6 +279,8 @@ class LoungePostsReportsTable extends _i1.Table {
         reason,
         createdAt,
         updatedAt,
+        $_loungePostsReportsLoungePostsId,
+        $_usersPostreportsUsersId,
       ];
 }
 

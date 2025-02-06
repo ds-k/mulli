@@ -7,5 +7,22 @@ fields:
   name: String
   email: String
   userProfileUrl: String
+  region1: String
+  region2: String
+  region3: String?
+  region4: String?
+  lat: double?
+  lng: double?
   createdAt: DateTime
   updatedAt: DateTime
+  products: List<Products>?, relation
+  loungePosts: List<LoungePosts>?, relation
+  loungeComments: List<LoungePostsComments>?, relation
+  productLikes: List<ProductsLikes>?, relation
+  productReports: List<ProductsReports>?, relation
+  postLikes: List<LoungePostsLikes>?, relation
+  postReports: List<LoungePostsReports>?, relation
+  buyerChatRooms: List<ChatRooms>?, relation
+  sellerChatRooms: List<ChatRooms>?, relation
+  messages: List<Messages>?, relation
+  userTerms: List<UserTerms>?, relation

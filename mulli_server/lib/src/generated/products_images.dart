@@ -61,6 +61,8 @@ abstract class ProductsImages
 
   DateTime updatedAt;
 
+  int? _productsImagesProductsId;
+
   @override
   _i1.Table get table => t;
 
@@ -81,6 +83,8 @@ abstract class ProductsImages
       'isThumbnail': isThumbnail,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_productsImagesProductsId != null)
+        '_productsImagesProductsId': _productsImagesProductsId,
     };
   }
 
@@ -165,6 +169,49 @@ class _ProductsImagesImpl extends ProductsImages {
   }
 }
 
+class ProductsImagesImplicit extends _ProductsImagesImpl {
+  ProductsImagesImplicit._({
+    int? id,
+    required int productId,
+    required String s3Url,
+    required bool isThumbnail,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_productsImagesProductsId,
+  }) : super(
+          id: id,
+          productId: productId,
+          s3Url: s3Url,
+          isThumbnail: isThumbnail,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory ProductsImagesImplicit(
+    ProductsImages productsImages, {
+    int? $_productsImagesProductsId,
+  }) {
+    return ProductsImagesImplicit._(
+      id: productsImages.id,
+      productId: productsImages.productId,
+      s3Url: productsImages.s3Url,
+      isThumbnail: productsImages.isThumbnail,
+      createdAt: productsImages.createdAt,
+      updatedAt: productsImages.updatedAt,
+      $_productsImagesProductsId: $_productsImagesProductsId,
+    );
+  }
+
+  int? $_productsImagesProductsId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({'_productsImagesProductsId': $_productsImagesProductsId});
+    return jsonMap;
+  }
+}
+
 class ProductsImagesTable extends _i1.Table {
   ProductsImagesTable({super.tableRelation})
       : super(tableName: 'products_images') {
@@ -188,6 +235,10 @@ class ProductsImagesTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_productsImagesProductsId = _i1.ColumnInt(
+      '_productsImagesProductsId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt productId;
@@ -200,6 +251,8 @@ class ProductsImagesTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_productsImagesProductsId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -208,6 +261,7 @@ class ProductsImagesTable extends _i1.Table {
         isThumbnail,
         createdAt,
         updatedAt,
+        $_productsImagesProductsId,
       ];
 }
 

@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
+import 'messages.dart' as _i2;
 
 abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
   ChatRooms._({
@@ -20,6 +21,7 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
+    this.messages,
   });
 
   factory ChatRooms({
@@ -30,6 +32,7 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.Messages>? messages,
   }) = _ChatRoomsImpl;
 
   factory ChatRooms.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -43,6 +46,9 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      messages: (jsonSerialization['messages'] as List?)
+          ?.map((e) => _i2.Messages.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -65,6 +71,14 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
 
   DateTime updatedAt;
 
+  List<_i2.Messages>? messages;
+
+  int? _productsChatroomsProductsId;
+
+  int? _usersBuyerchatroomsUsersId;
+
+  int? _usersSellerchatroomsUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -76,6 +90,7 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.Messages>? messages,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -87,6 +102,14 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (messages != null)
+        'messages': messages?.toJson(valueToJson: (v) => v.toJson()),
+      if (_productsChatroomsProductsId != null)
+        '_productsChatroomsProductsId': _productsChatroomsProductsId,
+      if (_usersBuyerchatroomsUsersId != null)
+        '_usersBuyerchatroomsUsersId': _usersBuyerchatroomsUsersId,
+      if (_usersSellerchatroomsUsersId != null)
+        '_usersSellerchatroomsUsersId': _usersSellerchatroomsUsersId,
     };
   }
 
@@ -100,11 +123,13 @@ abstract class ChatRooms implements _i1.TableRow, _i1.ProtocolSerialization {
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (messages != null)
+        'messages': messages?.toJson(valueToJson: (v) => v.toJsonForProtocol()),
     };
   }
 
-  static ChatRoomsInclude include() {
-    return ChatRoomsInclude._();
+  static ChatRoomsInclude include({_i2.MessagesIncludeList? messages}) {
+    return ChatRoomsInclude._(messages: messages);
   }
 
   static ChatRoomsIncludeList includeList({
@@ -144,6 +169,7 @@ class _ChatRoomsImpl extends ChatRooms {
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.Messages>? messages,
   }) : super._(
           id: id,
           productId: productId,
@@ -152,6 +178,7 @@ class _ChatRoomsImpl extends ChatRooms {
           isDeleted: isDeleted,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          messages: messages,
         );
 
   @override
@@ -163,6 +190,7 @@ class _ChatRoomsImpl extends ChatRooms {
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? messages = _Undefined,
   }) {
     return ChatRooms(
       id: id is int? ? id : this.id,
@@ -172,7 +200,73 @@ class _ChatRoomsImpl extends ChatRooms {
       isDeleted: isDeleted ?? this.isDeleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      messages: messages is List<_i2.Messages>?
+          ? messages
+          : this.messages?.map((e0) => e0.copyWith()).toList(),
     );
+  }
+}
+
+class ChatRoomsImplicit extends _ChatRoomsImpl {
+  ChatRoomsImplicit._({
+    int? id,
+    required int productId,
+    required int buyerId,
+    required int sellerId,
+    required bool isDeleted,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    List<_i2.Messages>? messages,
+    this.$_productsChatroomsProductsId,
+    this.$_usersBuyerchatroomsUsersId,
+    this.$_usersSellerchatroomsUsersId,
+  }) : super(
+          id: id,
+          productId: productId,
+          buyerId: buyerId,
+          sellerId: sellerId,
+          isDeleted: isDeleted,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+          messages: messages,
+        );
+
+  factory ChatRoomsImplicit(
+    ChatRooms chatRooms, {
+    int? $_productsChatroomsProductsId,
+    int? $_usersBuyerchatroomsUsersId,
+    int? $_usersSellerchatroomsUsersId,
+  }) {
+    return ChatRoomsImplicit._(
+      id: chatRooms.id,
+      productId: chatRooms.productId,
+      buyerId: chatRooms.buyerId,
+      sellerId: chatRooms.sellerId,
+      isDeleted: chatRooms.isDeleted,
+      createdAt: chatRooms.createdAt,
+      updatedAt: chatRooms.updatedAt,
+      messages: chatRooms.messages,
+      $_productsChatroomsProductsId: $_productsChatroomsProductsId,
+      $_usersBuyerchatroomsUsersId: $_usersBuyerchatroomsUsersId,
+      $_usersSellerchatroomsUsersId: $_usersSellerchatroomsUsersId,
+    );
+  }
+
+  int? $_productsChatroomsProductsId;
+
+  int? $_usersBuyerchatroomsUsersId;
+
+  int? $_usersSellerchatroomsUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_productsChatroomsProductsId': $_productsChatroomsProductsId,
+      '_usersBuyerchatroomsUsersId': $_usersBuyerchatroomsUsersId,
+      '_usersSellerchatroomsUsersId': $_usersSellerchatroomsUsersId
+    });
+    return jsonMap;
   }
 }
 
@@ -202,6 +296,18 @@ class ChatRoomsTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_productsChatroomsProductsId = _i1.ColumnInt(
+      '_productsChatroomsProductsId',
+      this,
+    );
+    $_usersBuyerchatroomsUsersId = _i1.ColumnInt(
+      '_usersBuyerchatroomsUsersId',
+      this,
+    );
+    $_usersSellerchatroomsUsersId = _i1.ColumnInt(
+      '_usersSellerchatroomsUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt productId;
@@ -216,6 +322,47 @@ class ChatRoomsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  _i2.MessagesTable? ___messages;
+
+  _i1.ManyRelation<_i2.MessagesTable>? _messages;
+
+  late final _i1.ColumnInt $_productsChatroomsProductsId;
+
+  late final _i1.ColumnInt $_usersBuyerchatroomsUsersId;
+
+  late final _i1.ColumnInt $_usersSellerchatroomsUsersId;
+
+  _i2.MessagesTable get __messages {
+    if (___messages != null) return ___messages!;
+    ___messages = _i1.createRelationTable(
+      relationFieldName: '__messages',
+      field: ChatRooms.t.id,
+      foreignField: _i2.Messages.t.$_chatRoomsMessagesChatRoomsId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.MessagesTable(tableRelation: foreignTableRelation),
+    );
+    return ___messages!;
+  }
+
+  _i1.ManyRelation<_i2.MessagesTable> get messages {
+    if (_messages != null) return _messages!;
+    var relationTable = _i1.createRelationTable(
+      relationFieldName: 'messages',
+      field: ChatRooms.t.id,
+      foreignField: _i2.Messages.t.$_chatRoomsMessagesChatRoomsId,
+      tableRelation: tableRelation,
+      createTable: (foreignTableRelation) =>
+          _i2.MessagesTable(tableRelation: foreignTableRelation),
+    );
+    _messages = _i1.ManyRelation<_i2.MessagesTable>(
+      tableWithRelations: relationTable,
+      table: _i2.MessagesTable(
+          tableRelation: relationTable.tableRelation!.lastRelation),
+    );
+    return _messages!;
+  }
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -225,14 +372,29 @@ class ChatRoomsTable extends _i1.Table {
         isDeleted,
         createdAt,
         updatedAt,
+        $_productsChatroomsProductsId,
+        $_usersBuyerchatroomsUsersId,
+        $_usersSellerchatroomsUsersId,
       ];
+
+  @override
+  _i1.Table? getRelationTable(String relationField) {
+    if (relationField == 'messages') {
+      return __messages;
+    }
+    return null;
+  }
 }
 
 class ChatRoomsInclude extends _i1.IncludeObject {
-  ChatRoomsInclude._();
+  ChatRoomsInclude._({_i2.MessagesIncludeList? messages}) {
+    _messages = messages;
+  }
+
+  _i2.MessagesIncludeList? _messages;
 
   @override
-  Map<String, _i1.Include?> get includes => {};
+  Map<String, _i1.Include?> get includes => {'messages': _messages};
 
   @override
   _i1.Table get table => ChatRooms.t;
@@ -261,6 +423,14 @@ class ChatRoomsIncludeList extends _i1.IncludeList {
 class ChatRoomsRepository {
   const ChatRoomsRepository._();
 
+  final attach = const ChatRoomsAttachRepository._();
+
+  final attachRow = const ChatRoomsAttachRowRepository._();
+
+  final detach = const ChatRoomsDetachRepository._();
+
+  final detachRow = const ChatRoomsDetachRowRepository._();
+
   Future<List<ChatRooms>> find(
     _i1.Session session, {
     _i1.WhereExpressionBuilder<ChatRoomsTable>? where,
@@ -270,6 +440,7 @@ class ChatRoomsRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<ChatRoomsTable>? orderByList,
     _i1.Transaction? transaction,
+    ChatRoomsInclude? include,
   }) async {
     return session.db.find<ChatRooms>(
       where: where?.call(ChatRooms.t),
@@ -279,6 +450,7 @@ class ChatRoomsRepository {
       limit: limit,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -290,6 +462,7 @@ class ChatRoomsRepository {
     bool orderDescending = false,
     _i1.OrderByListBuilder<ChatRoomsTable>? orderByList,
     _i1.Transaction? transaction,
+    ChatRoomsInclude? include,
   }) async {
     return session.db.findFirstRow<ChatRooms>(
       where: where?.call(ChatRooms.t),
@@ -298,6 +471,7 @@ class ChatRoomsRepository {
       orderDescending: orderDescending,
       offset: offset,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -305,10 +479,12 @@ class ChatRoomsRepository {
     _i1.Session session,
     int id, {
     _i1.Transaction? transaction,
+    ChatRoomsInclude? include,
   }) async {
     return session.db.findById<ChatRooms>(
       id,
       transaction: transaction,
+      include: include,
     );
   }
 
@@ -402,6 +578,114 @@ class ChatRoomsRepository {
     return session.db.count<ChatRooms>(
       where: where?.call(ChatRooms.t),
       limit: limit,
+      transaction: transaction,
+    );
+  }
+}
+
+class ChatRoomsAttachRepository {
+  const ChatRoomsAttachRepository._();
+
+  Future<void> messages(
+    _i1.Session session,
+    ChatRooms chatRooms,
+    List<_i2.Messages> messages, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (messages.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('messages.id');
+    }
+    if (chatRooms.id == null) {
+      throw ArgumentError.notNull('chatRooms.id');
+    }
+
+    var $messages = messages
+        .map((e) => _i2.MessagesImplicit(
+              e,
+              $_chatRoomsMessagesChatRoomsId: chatRooms.id,
+            ))
+        .toList();
+    await session.db.update<_i2.Messages>(
+      $messages,
+      columns: [_i2.Messages.t.$_chatRoomsMessagesChatRoomsId],
+      transaction: transaction,
+    );
+  }
+}
+
+class ChatRoomsAttachRowRepository {
+  const ChatRoomsAttachRowRepository._();
+
+  Future<void> messages(
+    _i1.Session session,
+    ChatRooms chatRooms,
+    _i2.Messages messages, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (messages.id == null) {
+      throw ArgumentError.notNull('messages.id');
+    }
+    if (chatRooms.id == null) {
+      throw ArgumentError.notNull('chatRooms.id');
+    }
+
+    var $messages = _i2.MessagesImplicit(
+      messages,
+      $_chatRoomsMessagesChatRoomsId: chatRooms.id,
+    );
+    await session.db.updateRow<_i2.Messages>(
+      $messages,
+      columns: [_i2.Messages.t.$_chatRoomsMessagesChatRoomsId],
+      transaction: transaction,
+    );
+  }
+}
+
+class ChatRoomsDetachRepository {
+  const ChatRoomsDetachRepository._();
+
+  Future<void> messages(
+    _i1.Session session,
+    List<_i2.Messages> messages, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (messages.any((e) => e.id == null)) {
+      throw ArgumentError.notNull('messages.id');
+    }
+
+    var $messages = messages
+        .map((e) => _i2.MessagesImplicit(
+              e,
+              $_chatRoomsMessagesChatRoomsId: null,
+            ))
+        .toList();
+    await session.db.update<_i2.Messages>(
+      $messages,
+      columns: [_i2.Messages.t.$_chatRoomsMessagesChatRoomsId],
+      transaction: transaction,
+    );
+  }
+}
+
+class ChatRoomsDetachRowRepository {
+  const ChatRoomsDetachRowRepository._();
+
+  Future<void> messages(
+    _i1.Session session,
+    _i2.Messages messages, {
+    _i1.Transaction? transaction,
+  }) async {
+    if (messages.id == null) {
+      throw ArgumentError.notNull('messages.id');
+    }
+
+    var $messages = _i2.MessagesImplicit(
+      messages,
+      $_chatRoomsMessagesChatRoomsId: null,
+    );
+    await session.db.updateRow<_i2.Messages>(
+      $messages,
+      columns: [_i2.Messages.t.$_chatRoomsMessagesChatRoomsId],
       transaction: transaction,
     );
   }

@@ -26,7 +26,9 @@ import 'products_reports.dart' as _i14;
 import 'terms_and_conditions.dart' as _i15;
 import 'user_terms.dart' as _i16;
 import 'users.dart' as _i17;
-import 'package:mulli_server/src/generated/users.dart' as _i18;
+import 'package:mulli_server/src/generated/brands.dart' as _i18;
+import 'package:mulli_server/src/generated/products.dart' as _i19;
+import 'package:mulli_server/src/generated/users.dart' as _i20;
 export 'brands.dart';
 export 'chat_rooms.dart';
 export 'example.dart';
@@ -66,6 +68,12 @@ class Protocol extends _i1.SerializationManagerServer {
         ),
         _i2.ColumnDefinition(
           name: 'name',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'englishName',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
@@ -156,8 +164,57 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_productsChatroomsProductsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersBuyerchatroomsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersSellerchatroomsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'chat_rooms_fk_0',
+          columns: ['_productsChatroomsProductsId'],
+          referenceTable: 'products',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'chat_rooms_fk_1',
+          columns: ['_usersBuyerchatroomsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'chat_rooms_fk_2',
+          columns: ['_usersSellerchatroomsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'chat_rooms_pkey',
@@ -230,8 +287,25 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_usersLoungepostsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_fk_0',
+          columns: ['_usersLoungepostsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'lounge_posts_pkey',
@@ -310,8 +384,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_loungePostsCommentsLoungePostsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersLoungecommentsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_comments_fk_0',
+          columns: ['_loungePostsCommentsLoungePostsId'],
+          referenceTable: 'lounge_posts',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_comments_fk_1',
+          columns: ['_usersLoungecommentsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'lounge_posts_comments_pkey',
@@ -372,8 +479,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_loungePostsLikesLoungePostsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersPostlikesUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_likes_fk_0',
+          columns: ['_loungePostsLikesLoungePostsId'],
+          referenceTable: 'lounge_posts',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_likes_fk_1',
+          columns: ['_usersPostlikesUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'lounge_posts_likes_pkey',
@@ -434,8 +574,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_loungePostsReportsLoungePostsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersPostreportsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_reports_fk_0',
+          columns: ['_loungePostsReportsLoungePostsId'],
+          referenceTable: 'lounge_posts',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'lounge_posts_reports_fk_1',
+          columns: ['_usersPostreportsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'lounge_posts_reports_pkey',
@@ -514,8 +687,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_chatRoomsMessagesChatRoomsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersMessagesUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'messages_fk_0',
+          columns: ['_chatRoomsMessagesChatRoomsId'],
+          referenceTable: 'chat_rooms',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'messages_fk_1',
+          columns: ['_usersMessagesUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'messages_pkey',
@@ -601,10 +807,46 @@ class Protocol extends _i1.SerializationManagerServer {
           dartType: 'int',
         ),
         _i2.ColumnDefinition(
-          name: 'location',
+          name: 'region1',
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region2',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region3',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region4',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'salesStatus',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lat',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lng',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
         ),
         _i2.ColumnDefinition(
           name: 'likesCount',
@@ -636,8 +878,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_brandsProductsBrandsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersProductsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_fk_0',
+          columns: ['_brandsProductsBrandsId'],
+          referenceTable: 'brands',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_fk_1',
+          columns: ['_usersProductsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'products_pkey',
@@ -698,8 +973,25 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_productsImagesProductsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_images_fk_0',
+          columns: ['_productsImagesProductsId'],
+          referenceTable: 'products',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        )
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'products_images_pkey',
@@ -760,8 +1052,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_productsLikesProductsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersProductlikesUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_likes_fk_0',
+          columns: ['_productsLikesProductsId'],
+          referenceTable: 'products',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_likes_fk_1',
+          columns: ['_usersProductlikesUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'products_likes_pkey',
@@ -822,8 +1147,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_productsReportsProductsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersProductreportsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_reports_fk_0',
+          columns: ['_productsReportsProductsId'],
+          referenceTable: 'products',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'products_reports_fk_1',
+          columns: ['_usersProductreportsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'products_reports_pkey',
@@ -952,8 +1310,41 @@ class Protocol extends _i1.SerializationManagerServer {
           isNullable: false,
           dartType: 'DateTime',
         ),
+        _i2.ColumnDefinition(
+          name: '_termsAndConditionsUsertermsTermsAndConditionsId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
+        _i2.ColumnDefinition(
+          name: '_usersUsertermsUsersId',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: true,
+          dartType: 'int?',
+        ),
       ],
-      foreignKeys: [],
+      foreignKeys: [
+        _i2.ForeignKeyDefinition(
+          constraintName: 'user_terms_fk_0',
+          columns: ['_termsAndConditionsUsertermsTermsAndConditionsId'],
+          referenceTable: 'terms_and_conditions',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+        _i2.ForeignKeyDefinition(
+          constraintName: 'user_terms_fk_1',
+          columns: ['_usersUsertermsUsersId'],
+          referenceTable: 'users',
+          referenceTableSchema: 'public',
+          referenceColumns: ['id'],
+          onUpdate: _i2.ForeignKeyAction.noAction,
+          onDelete: _i2.ForeignKeyAction.noAction,
+          matchType: null,
+        ),
+      ],
       indexes: [
         _i2.IndexDefinition(
           indexName: 'user_terms_pkey',
@@ -1013,6 +1404,42 @@ class Protocol extends _i1.SerializationManagerServer {
           columnType: _i2.ColumnType.text,
           isNullable: false,
           dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region1',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region2',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region3',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'region4',
+          columnType: _i2.ColumnType.text,
+          isNullable: true,
+          dartType: 'String?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lat',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
+        ),
+        _i2.ColumnDefinition(
+          name: 'lng',
+          columnType: _i2.ColumnType.doublePrecision,
+          isNullable: true,
+          dartType: 'double?',
         ),
         _i2.ColumnDefinition(
           name: 'createdAt',
@@ -1146,8 +1573,143 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i17.Users?>()) {
       return (data != null ? _i17.Users.fromJson(data) : null) as T;
     }
-    if (t == List<_i18.Users>) {
-      return (data as List).map((e) => deserialize<_i18.Users>(e)).toList()
+    if (t == _i1.getType<List<_i11.Products>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i11.Products>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Messages>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Messages>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i7.LoungePostsComments>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i7.LoungePostsComments>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i8.LoungePostsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i8.LoungePostsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i9.LoungePostsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i9.LoungePostsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i12.ProductsImages>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i12.ProductsImages>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i13.ProductsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i13.ProductsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i14.ProductsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i14.ProductsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i4.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i4.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i16.UserTerms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i16.UserTerms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i11.Products>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i11.Products>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i6.LoungePosts>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i6.LoungePosts>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i7.LoungePostsComments>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i7.LoungePostsComments>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i13.ProductsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i13.ProductsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i14.ProductsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i14.ProductsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i8.LoungePostsLikes>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i8.LoungePostsLikes>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i9.LoungePostsReports>?>()) {
+      return (data != null
+          ? (data as List)
+              .map((e) => deserialize<_i9.LoungePostsReports>(e))
+              .toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i4.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i4.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i4.ChatRooms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i4.ChatRooms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i10.Messages>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i10.Messages>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == _i1.getType<List<_i16.UserTerms>?>()) {
+      return (data != null
+          ? (data as List).map((e) => deserialize<_i16.UserTerms>(e)).toList()
+          : null) as dynamic;
+    }
+    if (t == List<_i18.Brands>) {
+      return (data as List).map((e) => deserialize<_i18.Brands>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i19.Products>) {
+      return (data as List).map((e) => deserialize<_i19.Products>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i20.Users>) {
+      return (data as List).map((e) => deserialize<_i20.Users>(e)).toList()
           as dynamic;
     }
     try {

@@ -9,3 +9,6 @@ fields:
   isDeleted: bool
   createdAt: DateTime
   updatedAt: DateTime
+  comments: List<LoungePostsComments>?, relation
+  likes: List<LoungePostsLikes>?, relation
+  reports: List<LoungePostsReports>?, relation

@@ -61,6 +61,10 @@ abstract class ProductsReports
 
   DateTime updatedAt;
 
+  int? _productsReportsProductsId;
+
+  int? _usersProductreportsUsersId;
+
   @override
   _i1.Table get table => t;
 
@@ -81,6 +85,10 @@ abstract class ProductsReports
       'reason': reason,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (_productsReportsProductsId != null)
+        '_productsReportsProductsId': _productsReportsProductsId,
+      if (_usersProductreportsUsersId != null)
+        '_usersProductreportsUsersId': _usersProductreportsUsersId,
     };
   }
 
@@ -165,6 +173,57 @@ class _ProductsReportsImpl extends ProductsReports {
   }
 }
 
+class ProductsReportsImplicit extends _ProductsReportsImpl {
+  ProductsReportsImplicit._({
+    int? id,
+    required int userId,
+    required int productId,
+    required String reason,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    this.$_productsReportsProductsId,
+    this.$_usersProductreportsUsersId,
+  }) : super(
+          id: id,
+          userId: userId,
+          productId: productId,
+          reason: reason,
+          createdAt: createdAt,
+          updatedAt: updatedAt,
+        );
+
+  factory ProductsReportsImplicit(
+    ProductsReports productsReports, {
+    int? $_productsReportsProductsId,
+    int? $_usersProductreportsUsersId,
+  }) {
+    return ProductsReportsImplicit._(
+      id: productsReports.id,
+      userId: productsReports.userId,
+      productId: productsReports.productId,
+      reason: productsReports.reason,
+      createdAt: productsReports.createdAt,
+      updatedAt: productsReports.updatedAt,
+      $_productsReportsProductsId: $_productsReportsProductsId,
+      $_usersProductreportsUsersId: $_usersProductreportsUsersId,
+    );
+  }
+
+  int? $_productsReportsProductsId;
+
+  int? $_usersProductreportsUsersId;
+
+  @override
+  Map<String, dynamic> toJson() {
+    var jsonMap = super.toJson();
+    jsonMap.addAll({
+      '_productsReportsProductsId': $_productsReportsProductsId,
+      '_usersProductreportsUsersId': $_usersProductreportsUsersId
+    });
+    return jsonMap;
+  }
+}
+
 class ProductsReportsTable extends _i1.Table {
   ProductsReportsTable({super.tableRelation})
       : super(tableName: 'products_reports') {
@@ -188,6 +247,14 @@ class ProductsReportsTable extends _i1.Table {
       'updatedAt',
       this,
     );
+    $_productsReportsProductsId = _i1.ColumnInt(
+      '_productsReportsProductsId',
+      this,
+    );
+    $_usersProductreportsUsersId = _i1.ColumnInt(
+      '_usersProductreportsUsersId',
+      this,
+    );
   }
 
   late final _i1.ColumnInt userId;
@@ -200,6 +267,10 @@ class ProductsReportsTable extends _i1.Table {
 
   late final _i1.ColumnDateTime updatedAt;
 
+  late final _i1.ColumnInt $_productsReportsProductsId;
+
+  late final _i1.ColumnInt $_usersProductreportsUsersId;
+
   @override
   List<_i1.Column> get columns => [
         id,
@@ -208,6 +279,8 @@ class ProductsReportsTable extends _i1.Table {
         reason,
         createdAt,
         updatedAt,
+        $_productsReportsProductsId,
+        $_usersProductreportsUsersId,
       ];
 }
 

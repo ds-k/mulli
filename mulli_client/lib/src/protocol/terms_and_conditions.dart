@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
+import 'user_terms.dart' as _i2;
 
 abstract class TermsAndConditions implements _i1.SerializableModel {
   TermsAndConditions._({
@@ -20,6 +21,7 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
     required this.version,
     required this.createdAt,
     required this.updatedAt,
+    this.userTerms,
   });
 
   factory TermsAndConditions({
@@ -30,6 +32,7 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
     required int version,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.UserTerms>? userTerms,
   }) = _TermsAndConditionsImpl;
 
   factory TermsAndConditions.fromJson(Map<String, dynamic> jsonSerialization) {
@@ -43,6 +46,9 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
       updatedAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['updatedAt']),
+      userTerms: (jsonSerialization['userTerms'] as List?)
+          ?.map((e) => _i2.UserTerms.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -63,6 +69,8 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
 
   DateTime updatedAt;
 
+  List<_i2.UserTerms>? userTerms;
+
   TermsAndConditions copyWith({
     int? id,
     String? title,
@@ -71,6 +79,7 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
     int? version,
     DateTime? createdAt,
     DateTime? updatedAt,
+    List<_i2.UserTerms>? userTerms,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -82,6 +91,8 @@ abstract class TermsAndConditions implements _i1.SerializableModel {
       'version': version,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
+      if (userTerms != null)
+        'userTerms': userTerms?.toJson(valueToJson: (v) => v.toJson()),
     };
   }
 
@@ -102,6 +113,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
     required int version,
     required DateTime createdAt,
     required DateTime updatedAt,
+    List<_i2.UserTerms>? userTerms,
   }) : super._(
           id: id,
           title: title,
@@ -110,6 +122,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
           version: version,
           createdAt: createdAt,
           updatedAt: updatedAt,
+          userTerms: userTerms,
         );
 
   @override
@@ -121,6 +134,7 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
     int? version,
     DateTime? createdAt,
     DateTime? updatedAt,
+    Object? userTerms = _Undefined,
   }) {
     return TermsAndConditions(
       id: id is int? ? id : this.id,
@@ -130,6 +144,9 @@ class _TermsAndConditionsImpl extends TermsAndConditions {
       version: version ?? this.version,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      userTerms: userTerms is List<_i2.UserTerms>?
+          ? userTerms
+          : this.userTerms?.map((e0) => e0.copyWith()).toList(),
     );
   }
 }

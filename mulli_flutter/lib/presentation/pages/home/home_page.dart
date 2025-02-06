@@ -16,7 +16,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String? _resultMessage;
   String? _errorMessage;
-  List<dynamic>? _users;
+  List<Users>? _users;
+  List<Brands>? _brands;
   final _textEditingController = TextEditingController();
 
   void _callHello() async {
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   void _fetchUsers() async {
     try {
       final users = await client.users.getAllUsers();
+      print(users.runtimeType);
       setState(() {
         _users = users;
       });
@@ -44,12 +46,14 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _fetchUserById(int id) async {
+  void _fetchBrands() async {
     try {
-      final user = await client.users.getUserById(id);
-      // 결과 처리
+      final brands = await client.brands.getAllBrands();
+      setState(() {
+        _brands = brands;
+      });
     } catch (e) {
-      // 에러 처리
+      print(e);
     }
   }
 
@@ -89,8 +93,16 @@ class _HomePageState extends State<HomePage> {
                 child: const Text('유저 조회'),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ElevatedButton(
+                onPressed: _fetchBrands,
+                child: const Text('브랜드 조회'),
+              ),
+            ),
             _ResultDisplay(
               users: _users,
+              brands: _brands,
               resultMessage: _resultMessage,
               errorMessage: _errorMessage,
             ),
@@ -104,12 +116,14 @@ class _HomePageState extends State<HomePage> {
 class _ResultDisplay extends StatelessWidget {
   final String? resultMessage;
   final String? errorMessage;
-  final List<dynamic>? users;
+  final List<Users>? users;
+  final List<Brands>? brands;
 
   const _ResultDisplay({
     this.resultMessage,
     this.errorMessage,
     this.users,
+    this.brands,
   });
 
   @override
@@ -128,18 +142,39 @@ class _ResultDisplay extends StatelessWidget {
     }
 
     return Container(
-      height: 100,
+      height: 200,
       color: backgroundColor,
-      child: Column(
-        children: [
-          Center(
-            child: Text(text),
-          ),
-          if (users != null)
-            for (var user in users!)
-              Text(
-                  '${user.id} ${user.name} ${user.email} ${user.createdAt} ${user.socialType}'),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Center(
+              child: Text(text),
+            ),
+            if (users != null)
+              Column(
+                children: users!
+                    .map((user) => Text(
+                        '${user.id} ${user.name} ${user.email} ${user.createdAt} ${user.socialType} ${user.region1} ${user.region2} ${user.region3} ${user.region4} ${user.lat} ${user.lng}'))
+                    .toList(),
+              ),
+            if (brands != null)
+              Column(
+                children: brands!
+                    .map((brand) => Column(
+                          children: [
+                            Text(
+                                '${brand.id} ${brand.name} ${brand.createdAt}'),
+                            SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Image.network(brand.logoImageUrl),
+                            ),
+                          ],
+                        ))
+                    .toList(),
+              ),
+          ],
+        ),
       ),
     );
   }

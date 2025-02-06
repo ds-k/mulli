@@ -8,3 +8,4 @@ fields:
   version: int
   createdAt: DateTime
   updatedAt: DateTime
+  userTerms: List<UserTerms>?, relation

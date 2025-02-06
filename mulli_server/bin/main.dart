@@ -6,6 +6,7 @@ void main(List<String> args) async {
   if (args.contains('--seed-data')) {
     final server = Server(args);
     await server.seedUsers();
+    // await server.seedBrands();
     return;
   }
 
