@@ -4,6 +4,8 @@ import 'package:mulli_server/src/web/routes/root.dart';
 import 'package:mulli_server/src/generated/protocol.dart';
 import 'package:mulli_server/src/generated/endpoints.dart';
 import 'package:mulli_server/src/seeding/users_seeder.dart';
+import 'package:serverpod_cloud_storage_s3/serverpod_cloud_storage_s3.dart'
+    as s3;
 
 class Server extends Serverpod {
   Server(List<String> args) : super(args, Protocol(), Endpoints());
@@ -30,6 +32,14 @@ class Server extends Serverpod {
 
 void run(List<String> args) async {
   final pod = Server(args);
+  pod.addCloudStorage(s3.S3CloudStorage(
+    serverpod: pod,
+    storageId: 'public',
+    public: true,
+    region: 'ap-northeast-2',
+    bucket: 'mulli',
+    publicHost: 'mulli.s3.ap-northeast-2.amazonaws.com',
+  ));
 
   // Setup routes...
   pod.webServer.addRoute(RouteRoot(), '/');
