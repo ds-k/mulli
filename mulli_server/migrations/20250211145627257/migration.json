@@ -1,0 +1,81 @@
+{
+  "actions": [
+    {
+      "type": "alterTable",
+      "alterTable": {
+        "name": "products",
+        "schema": "public",
+        "addColumns": [],
+        "deleteColumns": [
+          "shaftType",
+          "likesCount",
+          "reportsCount"
+        ],
+        "modifyColumns": [],
+        "addIndexes": [],
+        "deleteIndexes": [],
+        "addForeignKeys": [],
+        "deleteForeignKeys": [],
+        "warnings": [
+          {
+            "type": "columnDropped",
+            "message": "Column \"shaftType\" of table \"products\" will be dropped.",
+            "table": "products",
+            "columns": [
+              "shaftType"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"likesCount\" of table \"products\" will be dropped.",
+            "table": "products",
+            "columns": [
+              "likesCount"
+            ],
+            "destrucive": true
+          },
+          {
+            "type": "columnDropped",
+            "message": "Column \"reportsCount\" of table \"products\" will be dropped.",
+            "table": "products",
+            "columns": [
+              "reportsCount"
+            ],
+            "destrucive": true
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "type": "columnDropped",
+      "message": "Column \"shaftType\" of table \"products\" will be dropped.",
+      "table": "products",
+      "columns": [
+        "shaftType"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"likesCount\" of table \"products\" will be dropped.",
+      "table": "products",
+      "columns": [
+        "likesCount"
+      ],
+      "destrucive": true
+    },
+    {
+      "type": "columnDropped",
+      "message": "Column \"reportsCount\" of table \"products\" will be dropped.",
+      "table": "products",
+      "columns": [
+        "reportsCount"
+      ],
+      "destrucive": true
+    }
+  ],
+  "migrationApiVersion": 1
+}

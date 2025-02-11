@@ -24,7 +24,6 @@ abstract class Products implements _i1.SerializableModel {
     required this.price,
     required this.brandId,
     required this.clubType,
-    required this.shaftType,
     required this.flexType,
     required this.year,
     required this.region1,
@@ -34,8 +33,6 @@ abstract class Products implements _i1.SerializableModel {
     required this.salesStatus,
     this.lat,
     this.lng,
-    required this.likesCount,
-    required this.reportsCount,
     required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
@@ -53,7 +50,6 @@ abstract class Products implements _i1.SerializableModel {
     required double price,
     required int brandId,
     required String clubType,
-    required String shaftType,
     required String flexType,
     required int year,
     required String region1,
@@ -63,8 +59,6 @@ abstract class Products implements _i1.SerializableModel {
     required String salesStatus,
     double? lat,
     double? lng,
-    required int likesCount,
-    required int reportsCount,
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -83,7 +77,6 @@ abstract class Products implements _i1.SerializableModel {
       price: (jsonSerialization['price'] as num).toDouble(),
       brandId: jsonSerialization['brandId'] as int,
       clubType: jsonSerialization['clubType'] as String,
-      shaftType: jsonSerialization['shaftType'] as String,
       flexType: jsonSerialization['flexType'] as String,
       year: jsonSerialization['year'] as int,
       region1: jsonSerialization['region1'] as String,
@@ -93,8 +86,6 @@ abstract class Products implements _i1.SerializableModel {
       salesStatus: jsonSerialization['salesStatus'] as String,
       lat: (jsonSerialization['lat'] as num?)?.toDouble(),
       lng: (jsonSerialization['lng'] as num?)?.toDouble(),
-      likesCount: jsonSerialization['likesCount'] as int,
-      reportsCount: jsonSerialization['reportsCount'] as int,
       isDeleted: jsonSerialization['isDeleted'] as bool,
       createdAt:
           _i1.DateTimeJsonExtension.fromJson(jsonSerialization['createdAt']),
@@ -133,8 +124,6 @@ abstract class Products implements _i1.SerializableModel {
 
   String clubType;
 
-  String shaftType;
-
   String flexType;
 
   int year;
@@ -152,10 +141,6 @@ abstract class Products implements _i1.SerializableModel {
   double? lat;
 
   double? lng;
-
-  int likesCount;
-
-  int reportsCount;
 
   bool isDeleted;
 
@@ -179,7 +164,6 @@ abstract class Products implements _i1.SerializableModel {
     double? price,
     int? brandId,
     String? clubType,
-    String? shaftType,
     String? flexType,
     int? year,
     String? region1,
@@ -189,8 +173,6 @@ abstract class Products implements _i1.SerializableModel {
     String? salesStatus,
     double? lat,
     double? lng,
-    int? likesCount,
-    int? reportsCount,
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -209,7 +191,6 @@ abstract class Products implements _i1.SerializableModel {
       'price': price,
       'brandId': brandId,
       'clubType': clubType,
-      'shaftType': shaftType,
       'flexType': flexType,
       'year': year,
       'region1': region1,
@@ -219,8 +200,6 @@ abstract class Products implements _i1.SerializableModel {
       'salesStatus': salesStatus,
       if (lat != null) 'lat': lat,
       if (lng != null) 'lng': lng,
-      'likesCount': likesCount,
-      'reportsCount': reportsCount,
       'isDeleted': isDeleted,
       'createdAt': createdAt.toJson(),
       'updatedAt': updatedAt.toJson(),
@@ -251,7 +230,6 @@ class _ProductsImpl extends Products {
     required double price,
     required int brandId,
     required String clubType,
-    required String shaftType,
     required String flexType,
     required int year,
     required String region1,
@@ -261,8 +239,6 @@ class _ProductsImpl extends Products {
     required String salesStatus,
     double? lat,
     double? lng,
-    required int likesCount,
-    required int reportsCount,
     required bool isDeleted,
     required DateTime createdAt,
     required DateTime updatedAt,
@@ -278,7 +254,6 @@ class _ProductsImpl extends Products {
           price: price,
           brandId: brandId,
           clubType: clubType,
-          shaftType: shaftType,
           flexType: flexType,
           year: year,
           region1: region1,
@@ -288,8 +263,6 @@ class _ProductsImpl extends Products {
           salesStatus: salesStatus,
           lat: lat,
           lng: lng,
-          likesCount: likesCount,
-          reportsCount: reportsCount,
           isDeleted: isDeleted,
           createdAt: createdAt,
           updatedAt: updatedAt,
@@ -308,7 +281,6 @@ class _ProductsImpl extends Products {
     double? price,
     int? brandId,
     String? clubType,
-    String? shaftType,
     String? flexType,
     int? year,
     String? region1,
@@ -318,8 +290,6 @@ class _ProductsImpl extends Products {
     String? salesStatus,
     Object? lat = _Undefined,
     Object? lng = _Undefined,
-    int? likesCount,
-    int? reportsCount,
     bool? isDeleted,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -336,7 +306,6 @@ class _ProductsImpl extends Products {
       price: price ?? this.price,
       brandId: brandId ?? this.brandId,
       clubType: clubType ?? this.clubType,
-      shaftType: shaftType ?? this.shaftType,
       flexType: flexType ?? this.flexType,
       year: year ?? this.year,
       region1: region1 ?? this.region1,
@@ -346,8 +315,6 @@ class _ProductsImpl extends Products {
       salesStatus: salesStatus ?? this.salesStatus,
       lat: lat is double? ? lat : this.lat,
       lng: lng is double? ? lng : this.lng,
-      likesCount: likesCount ?? this.likesCount,
-      reportsCount: reportsCount ?? this.reportsCount,
       isDeleted: isDeleted ?? this.isDeleted,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,

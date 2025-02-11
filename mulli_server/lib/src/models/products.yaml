@@ -8,7 +8,6 @@ fields:
   price: double
   brandId: int
   clubType: String
-  shaftType: String
   flexType: String
   year: int
   region1: String
@@ -18,8 +17,6 @@ fields:
   salesStatus: String
   lat: double?
   lng: double?
-  likesCount: int
-  reportsCount: int
   isDeleted: bool
   createdAt: DateTime
   updatedAt: DateTime
