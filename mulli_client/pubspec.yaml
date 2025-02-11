@@ -6,3 +6,5 @@ environment:
 
 dependencies:
   serverpod_client: 2.3.1
+  image_picker: ^1.1.2
+  geolocator: ^13.0.2
