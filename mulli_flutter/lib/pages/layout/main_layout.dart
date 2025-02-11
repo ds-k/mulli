@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../constant/colors.dart';
+import '../../constant/colors.dart';
 import '../home/home_page.dart';
 import '../shop/shop_page.dart';
 import '../chat/chat_page.dart';

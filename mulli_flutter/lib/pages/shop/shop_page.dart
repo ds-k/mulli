@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mulli_flutter/presentation/pages/product/product_upload_page.dart';
+import 'package:mulli_flutter/pages/product/product_upload_page.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
