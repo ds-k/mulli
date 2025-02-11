@@ -13,6 +13,9 @@ products:
   - reportProduct:
   - updateProduct:
   - deleteProduct:
+upload:
+  - uploadImage:
+  - uploadMultipleImages:
 users:
   - getAllUsers:
   - getUserById:

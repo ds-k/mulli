@@ -285,6 +285,17 @@ class Protocol extends _i1.SerializationManager {
       return (data as List).map((e) => deserialize<_i18.Products>(e)).toList()
           as dynamic;
     }
+    if (t == List<int>) {
+      return (data as List).map((e) => deserialize<int>(e)).toList() as dynamic;
+    }
+    if (t == List<String>) {
+      return (data as List).map((e) => deserialize<String>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<List<int>>) {
+      return (data as List).map((e) => deserialize<List<int>>(e)).toList()
+          as dynamic;
+    }
     if (t == List<_i19.Users>) {
       return (data as List).map((e) => deserialize<_i19.Users>(e)).toList()
           as dynamic;

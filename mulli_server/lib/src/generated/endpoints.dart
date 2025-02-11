@@ -13,8 +13,9 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import '../endpoints/brands_endpoint.dart' as _i2;
 import '../endpoints/example_endpoint.dart' as _i3;
 import '../endpoints/products_endpoint.dart' as _i4;
-import '../endpoints/users_endpoint.dart' as _i5;
-import 'package:mulli_server/src/generated/products.dart' as _i6;
+import '../endpoints/upload_endpoint.dart' as _i5;
+import '../endpoints/users_endpoint.dart' as _i6;
+import 'package:mulli_server/src/generated/products.dart' as _i7;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
@@ -38,7 +39,13 @@ class Endpoints extends _i1.EndpointDispatch {
           'products',
           null,
         ),
-      'users': _i5.UsersEndpoint()
+      'upload': _i5.UploadEndpoint()
+        ..initialize(
+          server,
+          'upload',
+          null,
+        ),
+      'users': _i6.UsersEndpoint()
         ..initialize(
           server,
           'users',
@@ -256,7 +263,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'product': _i1.ParameterDescription(
               name: 'product',
-              type: _i1.getType<_i6.Products>(),
+              type: _i1.getType<_i7.Products>(),
               nullable: false,
             )
           },
@@ -289,6 +296,60 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
+    connectors['upload'] = _i1.EndpointConnector(
+      name: 'upload',
+      endpoint: endpoints['upload']!,
+      methodConnectors: {
+        'uploadImage': _i1.MethodConnector(
+          name: 'uploadImage',
+          params: {
+            'imageData': _i1.ParameterDescription(
+              name: 'imageData',
+              type: _i1.getType<List<int>>(),
+              nullable: false,
+            ),
+            'fileName': _i1.ParameterDescription(
+              name: 'fileName',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['upload'] as _i5.UploadEndpoint).uploadImage(
+            session,
+            params['imageData'],
+            params['fileName'],
+          ),
+        ),
+        'uploadMultipleImages': _i1.MethodConnector(
+          name: 'uploadMultipleImages',
+          params: {
+            'imagesData': _i1.ParameterDescription(
+              name: 'imagesData',
+              type: _i1.getType<List<List<int>>>(),
+              nullable: false,
+            ),
+            'fileNames': _i1.ParameterDescription(
+              name: 'fileNames',
+              type: _i1.getType<List<String>>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['upload'] as _i5.UploadEndpoint).uploadMultipleImages(
+            session,
+            params['imagesData'],
+            params['fileNames'],
+          ),
+        ),
+      },
+    );
     connectors['users'] = _i1.EndpointConnector(
       name: 'users',
       endpoint: endpoints['users']!,
@@ -300,7 +361,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i5.UsersEndpoint).getAllUsers(session),
+              (endpoints['users'] as _i6.UsersEndpoint).getAllUsers(session),
         ),
         'getUserById': _i1.MethodConnector(
           name: 'getUserById',
@@ -315,7 +376,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i5.UsersEndpoint).getUserById(
+              (endpoints['users'] as _i6.UsersEndpoint).getUserById(
             session,
             params['id'],
           ),
@@ -333,7 +394,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['users'] as _i5.UsersEndpoint).getUserByEmail(
+              (endpoints['users'] as _i6.UsersEndpoint).getUserByEmail(
             session,
             params['email'],
           ),

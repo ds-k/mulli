@@ -144,6 +144,40 @@ class EndpointProducts extends _i1.EndpointRef {
 }
 
 /// {@category Endpoint}
+class EndpointUpload extends _i1.EndpointRef {
+  EndpointUpload(_i1.EndpointCaller caller) : super(caller);
+
+  @override
+  String get name => 'upload';
+
+  _i2.Future<String?> uploadImage(
+    List<int> imageData,
+    String fileName,
+  ) =>
+      caller.callServerEndpoint<String?>(
+        'upload',
+        'uploadImage',
+        {
+          'imageData': imageData,
+          'fileName': fileName,
+        },
+      );
+
+  _i2.Future<List<String>> uploadMultipleImages(
+    List<List<int>> imagesData,
+    List<String> fileNames,
+  ) =>
+      caller.callServerEndpoint<List<String>>(
+        'upload',
+        'uploadMultipleImages',
+        {
+          'imagesData': imagesData,
+          'fileNames': fileNames,
+        },
+      );
+}
+
+/// {@category Endpoint}
 class EndpointUsers extends _i1.EndpointRef {
   EndpointUsers(_i1.EndpointCaller caller) : super(caller);
 
@@ -201,6 +235,7 @@ class Client extends _i1.ServerpodClientShared {
     brands = EndpointBrands(this);
     example = EndpointExample(this);
     products = EndpointProducts(this);
+    upload = EndpointUpload(this);
     users = EndpointUsers(this);
   }
 
@@ -210,6 +245,8 @@ class Client extends _i1.ServerpodClientShared {
 
   late final EndpointProducts products;
 
+  late final EndpointUpload upload;
+
   late final EndpointUsers users;
 
   @override
@@ -217,6 +254,7 @@ class Client extends _i1.ServerpodClientShared {
         'brands': brands,
         'example': example,
         'products': products,
+        'upload': upload,
         'users': users,
       };
 
