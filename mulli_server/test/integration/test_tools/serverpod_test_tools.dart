@@ -174,6 +174,35 @@ class _BrandsEndpoint {
       }
     });
   }
+
+  _i3.Future<bool> brandExists(
+    _i1.TestSessionBuilder sessionBuilder,
+    String path,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'brands',
+        method: 'brandExists',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'brands',
+          methodName: 'brandExists',
+          parameters: _i1.testObjectToJson({'path': path}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<bool>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
 }
 
 class _ExampleEndpoint {
@@ -539,26 +568,22 @@ class _UploadEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<String?> uploadImage(
+  _i3.Future<String?> getUploadDescription(
     _i1.TestSessionBuilder sessionBuilder,
-    List<int> imageData,
-    String fileName,
+    String path,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
           (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
         endpoint: 'upload',
-        method: 'uploadImage',
+        method: 'getUploadDescription',
       );
       try {
         var _localCallContext = await _endpointDispatch.getMethodCallContext(
           createSessionCallback: (_) => _localUniqueSession,
           endpointPath: 'upload',
-          methodName: 'uploadImage',
-          parameters: _i1.testObjectToJson({
-            'imageData': imageData,
-            'fileName': fileName,
-          }),
+          methodName: 'getUploadDescription',
+          parameters: _i1.testObjectToJson({'path': path}),
           serializationManager: _serializationManager,
         );
         var _localReturnValue = await (_localCallContext.method.call(
@@ -572,32 +597,57 @@ class _UploadEndpoint {
     });
   }
 
-  _i3.Future<List<String>> uploadMultipleImages(
+  _i3.Future<bool> verifyUpload(
     _i1.TestSessionBuilder sessionBuilder,
-    List<List<int>> imagesData,
-    List<String> fileNames,
+    String path,
   ) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
           (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
         endpoint: 'upload',
-        method: 'uploadMultipleImages',
+        method: 'verifyUpload',
       );
       try {
         var _localCallContext = await _endpointDispatch.getMethodCallContext(
           createSessionCallback: (_) => _localUniqueSession,
           endpointPath: 'upload',
-          methodName: 'uploadMultipleImages',
-          parameters: _i1.testObjectToJson({
-            'imagesData': imagesData,
-            'fileNames': fileNames,
-          }),
+          methodName: 'verifyUpload',
+          parameters: _i1.testObjectToJson({'path': path}),
           serializationManager: _serializationManager,
         );
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
-        ) as _i3.Future<List<String>>);
+        ) as _i3.Future<bool>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _i3.Future<bool> checkFileExists(
+    _i1.TestSessionBuilder sessionBuilder,
+    String path,
+  ) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'upload',
+        method: 'checkFileExists',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'upload',
+          methodName: 'checkFileExists',
+          parameters: _i1.testObjectToJson({'path': path}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<bool>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

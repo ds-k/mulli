@@ -2,74 +2,85 @@ import 'package:serverpod/serverpod.dart';
 
 class UploadEndpoint extends Endpoint {
   // 단일 이미지 업로드
-  Future<String?> uploadImage(
-    Session session,
-    List<int> imageData,
-    String fileName,
-  ) async {
+  Future<String?> getUploadDescription(Session session, String path) async {
     try {
-      // 파일명에 타임스탬프 추가하여 유니크한 파일명 생성
-      final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final extension = fileName.split('.').last;
-      final path = 'products/$timestamp.$extension'; // 확장자만 사용
+      session.log('Creating upload description for path: $path');
 
-      // 직접 업로드 설명 생성
-      final uploadDescription =
+      final description =
           await session.storage.createDirectFileUploadDescription(
         storageId: 'public',
         path: path,
       );
 
-      if (uploadDescription == null) {
-        throw Exception('Failed to create upload description');
+      if (description != null) {
+        session.log('Successfully created upload description');
+      } else {
+        session.log('Failed to create upload description');
       }
 
-      // 업로드 검증
+      return description;
+    } catch (e) {
+      session.log('Error creating upload description: $e');
+      return null;
+    }
+  }
+
+  Future<bool> verifyUpload(Session session, String path) async {
+    try {
+      session.log('Verifying upload for path: $path');
+
+      // 1. 파일 존재 여부 확인
+      final exists = await session.storage.fileExists(
+        storageId: 'public',
+        path: path,
+      );
+
+      session.log('File exists check: $exists');
+
+      if (!exists) {
+        session.log('File does not exist at path: $path');
+        return false;
+      }
+
+      // 2. 업로드 검증
       final isVerified = await session.storage.verifyDirectFileUpload(
         storageId: 'public',
         path: path,
       );
 
-      if (!isVerified) {
-        throw Exception('Failed to verify upload');
+      session.log('Upload verification result: $isVerified');
+
+      // 3. 파일이 공개적으로 접근 가능한지 확인
+      if (isVerified) {
+        final publicUrl = await session.storage.getPublicUrl(
+          storageId: 'public',
+          path: path,
+        );
+        session.log('Public URL generated: $publicUrl');
       }
 
-      // S3 URL 생성
-      return 'https://mulli.s3.ap-northeast-2.amazonaws.com/$path';
+      return isVerified;
     } catch (e) {
-      session.log('Failed to upload image: $e');
-      return null;
+      session.log('Error verifying upload: $e');
+      return false;
     }
   }
 
-  // 다중 이미지 업로드
-  Future<List<String>> uploadMultipleImages(
-    Session session,
-    List<List<int>> imagesData,
-    List<String> fileNames,
-  ) async {
-    if (imagesData.length != fileNames.length) {
-      throw Exception('Images data and file names length mismatch');
+  // 추가: 파일 존재 여부만 확인하는 메서드
+  Future<bool> checkFileExists(Session session, String path) async {
+    try {
+      session.log('Checking if file exists at path: $path');
+
+      final exists = await session.storage.fileExists(
+        storageId: 'public',
+        path: path,
+      );
+
+      session.log('File exists result: $exists');
+      return exists;
+    } catch (e) {
+      session.log('Error checking file existence: $e');
+      return false;
     }
-
-    final urls = <String>[];
-
-    for (var i = 0; i < imagesData.length; i++) {
-      try {
-        final url = await uploadImage(
-          session,
-          imagesData[i],
-          fileNames[i],
-        );
-
-        if (url != null) {
-          urls.add(url);
-        }
-      } catch (e) {
-        session.log('Failed to upload image ${fileNames[i]}: $e');
-      }
-    }
-
-    return urls;
   }
 }

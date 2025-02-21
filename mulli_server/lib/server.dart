@@ -38,7 +38,7 @@ void run(List<String> args) async {
     public: true,
     region: 'ap-northeast-2',
     bucket: 'mulli',
-    publicHost: 'mulli.s3.ap-northeast-2.amazonaws.com',
+    publicHost: 's3.ap-northeast-2.amazonaws.com/mulli',
   ));
 
   // Setup routes...

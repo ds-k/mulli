@@ -29,6 +29,12 @@ class EndpointBrands extends _i1.EndpointRef {
         'getAllBrands',
         {},
       );
+
+  _i2.Future<bool> brandExists(String path) => caller.callServerEndpoint<bool>(
+        'brands',
+        'brandExists',
+        {'path': path},
+      );
 }
 
 /// {@category Endpoint}
@@ -150,30 +156,24 @@ class EndpointUpload extends _i1.EndpointRef {
   @override
   String get name => 'upload';
 
-  _i2.Future<String?> uploadImage(
-    List<int> imageData,
-    String fileName,
-  ) =>
+  _i2.Future<String?> getUploadDescription(String path) =>
       caller.callServerEndpoint<String?>(
         'upload',
-        'uploadImage',
-        {
-          'imageData': imageData,
-          'fileName': fileName,
-        },
+        'getUploadDescription',
+        {'path': path},
       );
 
-  _i2.Future<List<String>> uploadMultipleImages(
-    List<List<int>> imagesData,
-    List<String> fileNames,
-  ) =>
-      caller.callServerEndpoint<List<String>>(
+  _i2.Future<bool> verifyUpload(String path) => caller.callServerEndpoint<bool>(
         'upload',
-        'uploadMultipleImages',
-        {
-          'imagesData': imagesData,
-          'fileNames': fileNames,
-        },
+        'verifyUpload',
+        {'path': path},
+      );
+
+  _i2.Future<bool> checkFileExists(String path) =>
+      caller.callServerEndpoint<bool>(
+        'upload',
+        'checkFileExists',
+        {'path': path},
       );
 }
 

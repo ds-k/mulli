@@ -64,7 +64,25 @@ class Endpoints extends _i1.EndpointDispatch {
             Map<String, dynamic> params,
           ) async =>
               (endpoints['brands'] as _i2.BrandsEndpoint).getAllBrands(session),
-        )
+        ),
+        'brandExists': _i1.MethodConnector(
+          name: 'brandExists',
+          params: {
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['brands'] as _i2.BrandsEndpoint).brandExists(
+            session,
+            params['path'],
+          ),
+        ),
       },
     );
     connectors['example'] = _i1.EndpointConnector(
@@ -300,52 +318,58 @@ class Endpoints extends _i1.EndpointDispatch {
       name: 'upload',
       endpoint: endpoints['upload']!,
       methodConnectors: {
-        'uploadImage': _i1.MethodConnector(
-          name: 'uploadImage',
+        'getUploadDescription': _i1.MethodConnector(
+          name: 'getUploadDescription',
           params: {
-            'imageData': _i1.ParameterDescription(
-              name: 'imageData',
-              type: _i1.getType<List<int>>(),
-              nullable: false,
-            ),
-            'fileName': _i1.ParameterDescription(
-              name: 'fileName',
+            'path': _i1.ParameterDescription(
+              name: 'path',
               type: _i1.getType<String>(),
               nullable: false,
-            ),
+            )
           },
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['upload'] as _i5.UploadEndpoint).uploadImage(
+              (endpoints['upload'] as _i5.UploadEndpoint).getUploadDescription(
             session,
-            params['imageData'],
-            params['fileName'],
+            params['path'],
           ),
         ),
-        'uploadMultipleImages': _i1.MethodConnector(
-          name: 'uploadMultipleImages',
+        'verifyUpload': _i1.MethodConnector(
+          name: 'verifyUpload',
           params: {
-            'imagesData': _i1.ParameterDescription(
-              name: 'imagesData',
-              type: _i1.getType<List<List<int>>>(),
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
               nullable: false,
-            ),
-            'fileNames': _i1.ParameterDescription(
-              name: 'fileNames',
-              type: _i1.getType<List<String>>(),
-              nullable: false,
-            ),
+            )
           },
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['upload'] as _i5.UploadEndpoint).uploadMultipleImages(
+              (endpoints['upload'] as _i5.UploadEndpoint).verifyUpload(
             session,
-            params['imagesData'],
-            params['fileNames'],
+            params['path'],
+          ),
+        ),
+        'checkFileExists': _i1.MethodConnector(
+          name: 'checkFileExists',
+          params: {
+            'path': _i1.ParameterDescription(
+              name: 'path',
+              type: _i1.getType<String>(),
+              nullable: false,
+            )
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['upload'] as _i5.UploadEndpoint).checkFileExists(
+            session,
+            params['path'],
           ),
         ),
       },

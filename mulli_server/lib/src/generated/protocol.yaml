@@ -1,5 +1,6 @@
 brands:
   - getAllBrands:
+  - brandExists:
 example:
   - hello:
 products:
@@ -14,8 +15,9 @@ products:
   - updateProduct:
   - deleteProduct:
 upload:
-  - uploadImage:
-  - uploadMultipleImages:
+  - getUploadDescription:
+  - verifyUpload:
+  - checkFileExists:
 users:
   - getAllUsers:
   - getUserById:
