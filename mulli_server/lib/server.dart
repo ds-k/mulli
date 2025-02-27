@@ -35,7 +35,7 @@ void run(List<String> args) async {
   pod.addCloudStorage(s3.S3CloudStorage(
     serverpod: pod,
     storageId: 'public',
-    public: true,
+    public: false,
     region: 'ap-northeast-2',
     bucket: 'mulli',
     publicHost: 's3.ap-northeast-2.amazonaws.com/mulli',

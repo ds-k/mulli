@@ -9,7 +9,7 @@ class UploadEndpoint extends Endpoint {
       final description =
           await session.storage.createDirectFileUploadDescription(
         storageId: 'public',
-        path: path,
+        path: 'mulli/$path',
       );
 
       if (description != null) {

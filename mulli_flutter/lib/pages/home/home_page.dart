@@ -1,64 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mulli_client/mulli_client.dart';
+import '../../providers/client_provider.dart';
 import 'package:serverpod_flutter/serverpod_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-var client = Client('http://$localhost:8080/')
-  ..connectivityMonitor = FlutterConnectivityMonitor();
-
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final client = ref.watch(clientProvider);
+    String? _resultMessage;
+    String? _errorMessage;
+    List<Users>? _users;
+    List<Brands>? _brands;
+    final _textEditingController = TextEditingController();
 
-class _HomePageState extends State<HomePage> {
-  String? _resultMessage;
-  String? _errorMessage;
-  List<Users>? _users;
-  List<Brands>? _brands;
-  final _textEditingController = TextEditingController();
-
-  void _callHello() async {
-    try {
-      final result = await client.example.hello(_textEditingController.text);
-      setState(() {
-        _errorMessage = null;
+    void _callHello() async {
+      try {
+        final result = await client.example.hello(_textEditingController.text);
         _resultMessage = result;
-      });
-    } catch (e) {
-      setState(() {
+      } catch (e) {
         _errorMessage = '$e';
-      });
+      }
     }
-  }
 
-  void _fetchUsers() async {
-    try {
-      final users = await client.users.getAllUsers();
-      print(users.runtimeType);
-      setState(() {
+    void _fetchUsers() async {
+      try {
+        final users = await client.users.getAllUsers();
+        print(users.runtimeType);
         _users = users;
-      });
-    } catch (e) {
-      print(e);
+      } catch (e) {
+        print(e);
+      }
     }
-  }
 
-  void _fetchBrands() async {
-    try {
-      final brands = await client.brands.getAllBrands();
-      setState(() {
+    void _fetchBrands() async {
+      try {
+        final brands = await client.brands.getAllBrands();
         _brands = brands;
-      });
-    } catch (e) {
-      print(e);
+      } catch (e) {
+        print(e);
+      }
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
+    void _fetchBrandExists() async {
+      try {
+        final brandExists = await client.brands.brandExists('honma');
+        print(brandExists);
+      } catch (e) {
+        print(e);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: SvgPicture.asset(
@@ -98,6 +93,13 @@ class _HomePageState extends State<HomePage> {
               child: ElevatedButton(
                 onPressed: _fetchBrands,
                 child: const Text('브랜드 조회'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ElevatedButton(
+                onPressed: _fetchBrandExists,
+                child: const Text('브랜드 존재 여부 조회'),
               ),
             ),
             _ResultDisplay(

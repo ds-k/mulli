@@ -34,6 +34,11 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.normal,
           ),
         ),
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: AppColors.black,
+          selectionColor: const Color.fromARGB(34, 23, 23, 23),
+          selectionHandleColor: AppColors.black,
+        ),
       ),
       home: const MainLayout(),
     );
